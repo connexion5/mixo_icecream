@@ -188,7 +188,7 @@ a { color: inherit; }
 }
 .libro {
   position: relative;
-  width: min(72vw, 20rem);
+  width: min(78vw, 22rem);
   aspect-ratio: 4 / 5;
   transform-style: preserve-3d;
   transition: transform 1.6s cubic-bezier(.65,0,.2,1);
@@ -217,22 +217,22 @@ a { color: inherit; }
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(90deg, rgba(60,30,15,.10), transparent 10%, transparent 88%, rgba(60,30,15,.06));
 }
-.libro__logo { width: 36%; height: auto; margin: .25rem 0 .35rem; }
+.libro__logo { width: 40%; height: auto; margin: .25rem 0 .4rem; }
 .libro__titulo {
   margin: 0 0 1.1rem;
   font-family: var(--grabado); font-weight: 400;
-  font-size: .75rem; letter-spacing: .3em; text-transform: uppercase;
+  font-size: .8125rem; letter-spacing: .3em; text-transform: uppercase;
   color: #461218;
 }
 .libro__lista { list-style: none; margin: 0; padding: 0; width: 100%; }
 .libro__lista li + li::before { content: ""; display: block; width: 2.25rem; height: 1px; margin: 0 auto; background: rgba(70,18,24,.35); }
 .libro__lista button {
   width: 100%; display: grid; gap: .1rem; justify-items: center;
-  padding: .55rem .5rem;
+  padding: .62rem .5rem;
   background: none; border: 0; color: inherit; font: inherit; cursor: pointer;
 }
-.libro__nombre { font-family: var(--grabado); font-size: clamp(1.0625rem, 4.2vw, 1.25rem); line-height: 1.15; color: #2B1B18; transition: color .3s ease; }
-.libro__dest { font-family: var(--caps); font-size: .625rem; letter-spacing: .2em; text-transform: uppercase; color: #6A2A30; }
+.libro__nombre { font-family: var(--grabado); font-size: clamp(1.125rem, 4.6vw, 1.375rem); line-height: 1.15; color: #2B1B18; transition: color .3s ease; }
+.libro__dest { font-family: var(--caps); font-size: .6875rem; letter-spacing: .2em; text-transform: uppercase; color: #6A2A30; }
 .libro__lista button:hover .libro__nombre, .libro__lista button:focus-visible .libro__nombre { color: #6A2A30; }
 .libro__lista button:focus-visible { outline: 1px solid #6A2A30; outline-offset: -2px; }
 .libro__bajada { margin: auto 0 0; padding-top: .6rem; font-style: italic; font-size: .8125rem; color: rgba(43,27,24,.65); }
@@ -273,12 +273,12 @@ a { color: inherit; }
 .libro--abierta .libro__tapa { transform: rotateY(-178deg); cursor: default; }
 
 @media (min-width: 900px) {
-  .libro { width: 20rem; }
+  .libro { width: 22rem; }
   .libro--abierta { transform: translateX(50%); }
 }
 @media (max-width: 899px) {
-  .libro { aspect-ratio: 5 / 7; width: min(74vw, 19rem); }
-  .libro__pagina { padding: 2rem 1.35rem 1.4rem; }
+  .libro { aspect-ratio: 5 / 7; width: min(80vw, 20.5rem); }
+  .libro__pagina { padding: 2.1rem 1.4rem 1.4rem; }
   .libro--abierta .libro__tapa { transform: rotateY(-178deg) translateX(8%); opacity: 0; transition: transform 1.6s cubic-bezier(.65,0,.2,1), opacity .5s ease 1.1s; }
 }
 .sin-js .libro__tapa, .estatico .libro__tapa { display: none; }
@@ -447,7 +447,7 @@ a { color: inherit; }
 }
 .cartel__luz {
   display: flex; align-items: center; justify-content: center;
-  height: 3.6rem; padding: .2rem 2.1rem 0; border-radius: 999px;
+  height: 3.6rem; padding: 0 2.1rem; border-radius: 999px;
   font-family: var(--grabado); font-size: clamp(1.05rem, 4.6vw, 1.5rem); line-height: 1;
   letter-spacing: .08em; text-transform: uppercase; white-space: nowrap;
   position: relative; overflow: hidden;
@@ -459,7 +459,7 @@ a { color: inherit; }
   background: radial-gradient(120% 140% at 50% 50%, #FFF8E8, #F6E7C6 70%, #E9D3A4);
   box-shadow: inset 0 0 18px rgba(255,214,150,.6);
 }
-.cartel__texto { position: relative; color: rgba(240,238,233,.28); }
+.cartel__texto { position: relative; color: rgba(240,238,233,.28); transform: translateY(.14em); } /* las mayúsculas no tienen descendentes: se compensa para que queden al medio */
 .cartel__marco { transition: box-shadow .3s ease; }
 .cartel__cadena {
   position: absolute; top: calc(100% - 2px); right: 11%;
