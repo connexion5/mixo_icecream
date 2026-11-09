@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mixo | Heladería de autor inspirada en la alta coctelería</title>
+<meta name="description" content="Helados de autor infusionados con su propio destilado, servidos en barra en tu evento.">
+<meta name="theme-color" content="#000000">
+
+<!-- Vista previa al compartir el link por WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mixo">
+<meta property="og:description" content="Heladería de autor inspirada en la alta coctelería. Una experiencia dentro de tu evento.">
+<meta property="og:image" content="https://connexion5.github.io/mixo/media/compartir.jpg">
+<meta property="og:url" content="https://connexion5.github.io/mixo/">
+
+<link rel="preload" href="fonts/cormorant-sc-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/pinyon-script-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+/* Tipografías: si el dispositivo tiene Copperplate / Baskerville (iPhone, Mac) se usan las originales del manual.
+   Si no, entran sus equivalentes web. Para usar Altesse, subir el archivo a /fonts como altesse.woff2 */
+@font-face { font-family: "Altesse"; src: url("fonts/altesse.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "Mixo Script"; src: url("fonts/pinyon-script-latin-400-normal.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "Mixo Caps"; src: url("fonts/cormorant-sc-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Mixo Caps"; src: url("fonts/cormorant-sc-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Mixo Serif"; src: url("fonts/libre-baskerville-latin-400-normal.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "Mixo Serif"; src: url("fonts/libre-baskerville-latin-400-italic.woff2") format("woff2"); font-style: italic; font-display: swap; }
+
+:root {
+  --negro: #000000;
+  --oro: #C6A15B;
+  --oro-claro: #E4CF9E;
+  --marfil: #EAE2D0;
+  --bordo: #5C1424;
+  --bordo-hondo: #2A0710;
+
+  --script: "Altesse", "Mixo Script", cursive;
+  --caps: "Copperplate", "Copperplate Gothic Light", "Mixo Caps", serif;
+  --serif: "Baskerville", "Mixo Serif", Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--negro); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--negro);
+  color: var(--marfil);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, video { display: block; max-width: 100%; }
+
+/* ───── Telón de entrada ───── */
+.telon {
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; grid-template-columns: 1fr 1fr;
+  pointer-events: none;
+}
+.telon__paño {
+  height: 100%;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 18%, rgba(0,0,0,0) 80%, rgba(0,0,0,.7) 100%),
+    repeating-linear-gradient(90deg,
+      var(--bordo-hondo) 0px, var(--bordo) 22px, #6E1A2C 34px, var(--bordo) 46px, var(--bordo-hondo) 70px);
+  transition: transform 2.2s cubic-bezier(.7,0,.2,1);
+  box-shadow: inset 0 -2px 0 var(--oro);
+}
+.telon__paño--izq { box-shadow: inset -1px 0 0 rgba(198,161,91,.5), inset 0 -2px 0 var(--oro); }
+.telon__paño--der { box-shadow: inset 1px 0 0 rgba(198,161,91,.5), inset 0 -2px 0 var(--oro); }
+.telon--abierto .telon__paño--izq { transform: translateX(-102%); }
+.telon--abierto .telon__paño--der { transform: translateX(102%); }
+.telon--fuera { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .telon { display: none; }
+}
+
+/* ───── Portada con video ───── */
+.portada {
+  min-height: 100svh;
+  display: flex; flex-direction: column; align-items: center;
+  padding: max(2.5rem, env(safe-area-inset-top)) 1.5rem 3.5rem;
+  text-align: center;
+}
+.marca {
+  font-family: var(--caps);
+  font-weight: 500;
+  font-size: clamp(2.25rem, 9vw, 3.5rem);
+  letter-spacing: .42em;
+  margin: 0 0 2rem .42em; /* compensa el tracking para que quede centrado */
+  color: var(--oro);
+  line-height: 1;
+}
+.pantalla {
+  position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 9 / 16;
+  background: var(--negro);
+  outline: 1px solid rgba(198,161,91,.55);
+  outline-offset: 10px;
+}
+.pantalla video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+/* Si todavía no hay video, la pantalla muestra la marca en lugar de un cuadro vacío */
+.pantalla__espera {
+  position: absolute; inset: 0;
+  display: none; place-items: center;
+  font-family: var(--script);
+  font-size: 4.5rem;
+  color: var(--oro);
+}
+.pantalla--sin-video video { display: none; }
+.pantalla--sin-video .pantalla__espera { display: grid; }
+
+.sonido {
+  position: absolute; right: .75rem; bottom: .75rem;
+  font: inherit; font-family: var(--serif); font-style: italic; font-size: .875rem;
+  color: var(--marfil);
+  background: rgba(0,0,0,.6);
+  border: 1px solid rgba(198,161,91,.6);
+  padding: .4rem .9rem;
+  cursor: pointer;
+}
+.sonido:focus-visible, a:focus-visible { outline: 2px solid var(--oro-claro); outline-offset: 3px; }
+.pantalla--sin-video .sonido { display: none; }
+
+.bajada {
+  margin: 3rem auto 0;
+  max-width: 30ch;
+}
+.bajada p { margin: 0; }
+.bajada p:first-child {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--marfil);
+}
+.bajada p + p {
+  margin-top: .75rem;
+  font-style: italic;
+  color: var(--oro-claro);
+}
+
+/* ───── Ornamento ───── */
+.filete {
+  display: block;
+  width: 7rem; height: 14px;
+  margin: 0 auto;
+  color: var(--oro);
+}
+
+/* ───── La carta ───── */
+.carta {
+  padding: 5rem 1.5rem 4rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+.titulo-script {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(3.5rem, 15vw, 5.5rem);
+  line-height: 1;
+  color: var(--oro);
+  text-align: center;
+  margin: 1.5rem 0 3.5rem;
+}
+.carta__lista {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  gap: 4.5rem;
+}
+@media (min-width: 760px) {
+  .carta__lista { grid-template-columns: 1fr 1fr; column-gap: 4rem; row-gap: 5rem; }
+}
+.trago { text-align: center; }
+.trago figure {
+  margin: 0 auto 1.75rem;
+  width: min(100%, 340px);
+  aspect-ratio: 4 / 5;
+  position: relative;
+  background: #050403;
+}
+.trago img { width: 100%; height: 100%; object-fit: cover; }
+.trago figure::after {
+  content: ""; position: absolute; inset: 0;
+  box-shadow: inset 0 0 0 1px rgba(198,161,91,.35);
+  pointer-events: none;
+}
+.trago figure.sin-foto img { display: none; }
+.trago figure.sin-foto::before {
+  content: ""; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 90' fill='none' stroke='%23C6A15B' stroke-width='1'%3E%3Cpath d='M8 12 Q30 46 52 12 Z'/%3E%3Cpath d='M30 40 V78'/%3E%3Cpath d='M18 80 H42'/%3E%3C/svg%3E") center / 64px no-repeat;
+  opacity: .7;
+}
+.trago h3 {
+  font-family: var(--caps);
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: .12em;
+  line-height: 1.3;
+  color: var(--oro);
+  margin: 0 0 .75rem;
+}
+.trago p {
+  margin: 0 auto;
+  max-width: 34ch;
+  font-size: 1rem;
+  color: var(--marfil);
+}
+.trago .ritual {
+  margin-top: .6rem;
+  font-style: italic;
+  color: var(--oro-claro);
+}
+
+/* ───── Cierre ───── */
+.cierre {
+  text-align: center;
+  padding: 5rem 1.5rem max(4rem, env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(198,161,91,.25);
+  margin-top: 2rem;
+}
+.cierre h2 {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(3rem, 13vw, 4.75rem);
+  line-height: 1.1;
+  color: var(--oro);
+  margin: 0 0 1.25rem;
+}
+.cierre p {
+  margin: 0 auto;
+  max-width: 26ch;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+.cierre .marca { margin-top: 4rem; margin-bottom: 1.25rem; font-size: 1.75rem; }
+.cierre small {
+  display: block;
+  font-size: .8125rem;
+  font-style: italic;
+  color: rgba(234,226,208,.6);
+}
+</style>
+</head>
+<body>
+
+<div class="telon" id="telon" aria-hidden="true">
+  <div class="telon__paño telon__paño--izq"></div>
+  <div class="telon__paño telon__paño--der"></div>
+</div>
+
+<main>
+  <header class="portada">
+    <h1 class="marca">MIXO</h1>
+
+    <div class="pantalla" id="pantalla">
+      <video id="video" playsinline muted loop autoplay preload="metadata" poster="media/portada.jpg">
+        <source src="media/mixo.mp4" type="video/mp4">
+      </video>
+      <div class="pantalla__espera" aria-hidden="true">Mixo</div>
+      <button class="sonido" id="sonido" type="button">Activar sonido</button>
+    </div>
+
+    <div class="bajada">
+      <p>Heladería de autor inspirada en la alta coctelería.</p>
+      <p>Una experiencia dentro de tu evento.</p>
+    </div>
+  </header>
+
+  <section class="carta" aria-labelledby="titulo-carta">
+    <svg class="filete" viewBox="0 0 112 14" aria-hidden="true"><path d="M0 7 H48 M64 7 H112" stroke="currentColor" stroke-width="1"/><path d="M56 1 L62 7 L56 13 L50 7 Z" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    <h2 class="titulo-script" id="titulo-carta">La carta</h2>
+
+    <ul class="carta__lista">
+      <li class="trago">
+        <figure><img src="media/old-fashioned.jpg" alt="Chocolate Old Fashioned servido en copa" loading="lazy"></figure>
+        <h3>Chocolate Old Fashioned</h3>
+        <p>Helado de chocolate con naranja, chocolate amargo y crocante de maní y almendras. Infusionado con whisky.</p>
+        <p class="ritual">Se termina con humo.</p>
+      </li>
+      <li class="trago">
+        <figure><img src="media/lemon-pie-gimlet.jpg" alt="Lemon Pie Gimlet servido en copa" loading="lazy"></figure>
+        <h3>Lemon Pie Gimlet</h3>
+        <p>Cítrico, cremoso y fresco.</p>
+        <p class="ritual">Con merengue italiano flameado.</p>
+      </li>
+      <li class="trago">
+        <figure><img src="media/ddl-reserve.jpg" alt="DDL Reserve servido en copa" loading="lazy"></figure>
+        <h3>DDL Reserve</h3>
+        <p>Helado cremoso con salsa de dulce de leche y ron dorado.</p>
+      </li>
+      <li class="trago">
+        <figure><img src="media/berry-martini.jpg" alt="Berry Martini servido en copa" loading="lazy"></figure>
+        <h3>Berry Martini</h3>
+        <p>Crema americana con frutos rojos.</p>
+        <p class="ritual">Coronado con un pincho de frambuesa.</p>
+      </li>
+    </ul>
+  </section>
+
+  <footer class="cierre">
+    <h2>¿Ya tenés fecha?</h2>
+    <p>Contanos tu evento y armamos la propuesta.</p>
+    <p class="marca">MIXO</p>
+    <small>Exclusivo para mayores de 18.</small>
+  </footer>
+</main>
+
+<script>
+(function () {
+  // Telón: se abre una sola vez al cargar
+  var telon = document.getElementById('telon');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    window.addEventListener('load', function () {
+      setTimeout(function () { telon.classList.add('telon--abierto'); }, 350);
+      setTimeout(function () { telon.classList.add('telon--fuera'); }, 2800);
+    });
+    // por si la carga se demora (señal floja), no dejar la página tapada
+    setTimeout(function () { telon.classList.add('telon--abierto'); }, 3500);
+    setTimeout(function () { telon.classList.add('telon--fuera'); }, 6000);
+  }
+
+  // Video: si todavía no está subido, la pantalla muestra la marca
+  var pantalla = document.getElementById('pantalla');
+  var video = document.getElementById('video');
+  var fuente = video.querySelector('source');
+  fuente.addEventListener('error', function () { pantalla.classList.add('pantalla--sin-video'); });
+  video.addEventListener('error', function () { pantalla.classList.add('pantalla--sin-video'); });
+
+  // Botón de sonido (en celulares el video arranca en silencio)
+  var sonido = document.getElementById('sonido');
+  sonido.addEventListener('click', function () {
+    video.muted = !video.muted;
+    if (!video.muted) { video.currentTime = 0; video.play(); }
+    sonido.textContent = video.muted ? 'Activar sonido' : 'Silenciar';
+  });
+
+  // Fotos de la carta: si falta alguna, queda un marco con una copa dibujada
+  document.querySelectorAll('.trago img').forEach(function (img) {
+    function marcar() { img.parentNode.classList.add('sin-foto'); }
+    if (img.complete && img.naturalWidth === 0) marcar();
+    img.addEventListener('error', marcar);
+  });
+})();
+</script>
+</body>
+</html>
