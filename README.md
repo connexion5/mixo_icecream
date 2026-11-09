@@ -1,14 +1,9 @@
-# Mixo · propuesta web
+# Mixo · sitio web
 
-Página para mandar por WhatsApp a clientes: video, carta y cierre.
+Portada con video, qué es Mixo, la carta (recorrido horizontal), En tu evento con galería, y contacto.
 
-## Archivos que hay que subir a /media
-- `mixo.mp4` — el video de portada (vertical 9:16, idealmente menos de 20 MB)
-- `portada.jpg` — primer cuadro del video (se ve mientras carga)
-- `old-fashioned.jpg`, `lemon-pie-gimlet.jpg`, `ddl-reserve.jpg`, `berry-martini.jpg` — fotos de la carta (vertical 4:5)
-- `compartir.jpg` — imagen que aparece en WhatsApp al mandar el link (1200×630)
-
-Si falta alguno, la página no se rompe: muestra la marca o una copa dibujada en su lugar.
-
-## Tipografía
-Para usar Altesse, subir el archivo a /fonts con el nombre `altesse.woff2`.
+## Para cambiar
+- **WhatsApp:** en `index.html`, buscar `var WHATSAPP = ''` y poner el número con código de país, sin + ni espacios (ej. `5493411234567`). Hasta que tenga número, el botón no aparece.
+- **Fotos:** están en `/media`. Reemplazar un archivo por otro con el mismo nombre cambia la foto en la página.
+- **Video de portada:** `media/mixo.mp4` (vertical, liviano: idealmente menos de 5 MB).
+- **Altesse:** subir el archivo a `/fonts` como `altesse.woff2` y se usa sola.
