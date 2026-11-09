@@ -159,7 +159,7 @@ a { color: inherit; }
 
 .frase { padding: 0 var(--margen) clamp(5rem, 14vw, 9rem); text-align: center; }
 .frase p:first-child {
-  margin: 0 auto; max-width: 18ch;
+  margin: 0 auto; max-width: 20ch;
   font-family: var(--grabado); font-weight: 400;
   font-size: clamp(1.875rem, 7vw, 3.5rem);
   line-height: 1.2; letter-spacing: .02em;
@@ -171,41 +171,81 @@ a { color: inherit; }
 
 /* ───────── La carta: tarjeta de bar + sabores de a uno ───────── */
 .carta { position: relative; }
-.menu { padding: clamp(2rem, 6vw, 5rem) clamp(.75rem, 3vw, 3rem); }
-.menu__tarjeta {
+.libro-escena {
+  padding: clamp(4rem, 10vw, 7rem) var(--margen) clamp(3rem, 8vw, 5rem);
+  perspective: 2200px;
+  overflow: hidden;
+}
+.libro {
+  position: relative;
+  width: min(86vw, 27rem);
+  aspect-ratio: 4 / 5;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  transition: transform 1.6s cubic-bezier(.65,0,.2,1);
+}
+.libro__pagina {
   --marco-inset: 8px;
-  max-width: 46rem; margin: 0 auto;
-  background:
-    radial-gradient(120% 80% at 30% 0%, rgba(255,255,255,.035), transparent 60%),
-    var(--bordo);
-  padding: clamp(3.5rem, 9vw, 5.5rem) clamp(2rem, 7vw, 4.5rem) clamp(3rem, 8vw, 4.5rem);
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  padding: 2.75rem 2rem 1.75rem;
+  background: radial-gradient(120% 90% at 40% 10%, #F6F4F0, var(--crema) 55%, #E4E1DA);
+  color: var(--negro);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,.7);
 }
-.menu__titulo {
-  margin: 0;
-  font-family: var(--caps); font-weight: 500;
-  font-size: .9375rem; letter-spacing: .32em;
-  color: var(--crema-suave);
-}
-.menu__logo { width: min(62%, 300px); height: auto; margin: 2.25rem 0 3rem; }
-.menu__lista { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(240,238,233,.16); }
-.menu__lista li { border-bottom: 1px solid rgba(240,238,233,.16); }
-.menu__lista button {
+.libro__pagina.marco-mixo::before { filter: invert(1) brightness(.35); }
+.libro__titulo { color: var(--bordo); font-size: clamp(2.5rem, 11vw, 3.25rem); text-align: center; margin-bottom: 1.5rem; }
+.libro__lista { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(20,20,20,.18); }
+.libro__lista li { border-bottom: 1px solid rgba(20,20,20,.18); }
+.libro__lista button {
   width: 100%;
-  display: grid; grid-template-columns: 2.75rem 1fr auto; align-items: baseline; gap: .75rem;
-  padding: 1.15rem 0;
+  display: grid; grid-template-columns: 2rem 1fr auto; align-items: baseline; gap: .5rem;
+  padding: .8rem 0;
   background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer;
 }
-.menu__num { font-family: var(--caps); font-size: .875rem; letter-spacing: .14em; color: var(--crema-suave); }
-.menu__nombre {
-  font-family: var(--grabado); font-size: clamp(1.375rem, 5.6vw, 2rem); line-height: 1.2;
-  color: var(--crema);
-  transition: color .3s ease;
+.libro__num { font-family: var(--caps); font-size: .8125rem; letter-spacing: .1em; color: rgba(20,20,20,.55); }
+.libro__nombre { font-family: var(--grabado); font-size: clamp(1.1875rem, 4.8vw, 1.5rem); line-height: 1.2; color: var(--negro); transition: color .3s ease; }
+.libro__dest { font-family: var(--caps); font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--bordo); }
+.libro__lista button:hover .libro__nombre, .libro__lista button:focus-visible .libro__nombre { color: var(--bordo); }
+.libro__lista button:focus-visible { outline-color: var(--bordo); outline-offset: -2px; }
+.libro__bajada { margin: 1.25rem 0 0; font-style: italic; font-size: .9375rem; line-height: 1.55; color: rgba(20,20,20,.7); text-align: center; }
+
+.libro__tapa {
+  position: absolute; inset: 0; z-index: 2;
+  padding: 0; border: 0; background: none; cursor: pointer;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1.6s cubic-bezier(.65,0,.2,1);
 }
-.menu__dest { font-family: var(--caps); font-size: .8125rem; letter-spacing: .22em; color: var(--crema-suave); text-transform: uppercase; }
-.menu__lista button:hover .menu__nombre, .menu__lista button:focus-visible .menu__nombre { color: var(--oro-claro); }
-.menu__lista button:focus-visible { outline-offset: -2px; }
-.menu__bajada { margin: 2.25rem 0 0; font-style: italic; font-size: 1.1875rem; line-height: 1.55; color: var(--crema-suave); max-width: 26ch; }
-.menu__iso { display: block; width: 84px; height: auto; margin: 3rem auto 0; }
+.libro__frente, .libro__dorso {
+  position: absolute; inset: 0;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,.8), inset 6px 0 10px -6px rgba(0,0,0,.6);
+}
+.libro__frente img { width: 100%; height: 100%; object-fit: cover; }
+.libro__dorso {
+  transform: rotateY(180deg);
+  display: grid; place-items: center;
+  background: url("media/tapa-interior.jpg") center / cover;
+}
+.libro__dorso img { width: 62%; height: auto; opacity: .55; }
+.libro--abierta .libro__tapa { transform: rotateY(-178deg); }
+.libro--abierta .libro__tapa { cursor: default; }
+
+@media (min-width: 900px) {
+  .libro { width: 25rem; }
+  .libro--abierta { transform: translateX(50%); }
+}
+@media (max-width: 899px) {
+  .libro { aspect-ratio: 3 / 4; }
+  .libro__pagina { padding: 2.25rem 1.6rem 1.4rem; }
+  .libro__titulo { margin-bottom: 1rem; }
+  .libro__lista button { padding: .7rem 0; }
+  /* en el celular la tapa se abre y sale de cuadro: queda solo la página */
+  .libro--abierta .libro__tapa { transform: rotateY(-178deg) translateX(8%); opacity: 0; transition: transform 1.6s cubic-bezier(.65,0,.2,1), opacity .5s ease 1.1s; }
+}
+.sin-js .libro__tapa, .estatico .libro__tapa { display: none; }
+
 .carta__recorrido { position: relative; }
 .carta__escena { position: sticky; top: 0; height: 100svh; overflow: hidden; }
 .carta__marcas {
@@ -430,24 +470,27 @@ a { color: inherit; }
   </section>
 
   <div class="frase">
-    <p>Un cóctel que se come con cuchara.</p>
-    <p class="frase__bajada">Coctelería de autor y heladería premium en una misma copa.</p>
-    <p class="frase__firma script">Una experiencia Mixo</p>
+    <p>Coctelería de autor y heladería premium en una misma copa.</p>
+    <p class="frase__firma script">Viví la experiencia Mixo</p>
   </div>
 
   <section class="carta" id="carta" aria-labelledby="t-carta">
-    <div class="menu">
-      <div class="menu__tarjeta marco-mixo">
-        <h2 class="menu__titulo" id="t-carta">La carta</h2>
-        <img class="menu__logo" src="media/logo-script.png" width="1400" height="505" alt="Mixo">
-        <ol class="menu__lista">
-          <li><button type="button" data-sabor="0"><span class="menu__num">01</span><span class="menu__nombre">Lemon Pie Gimlet</span><span class="menu__dest">Gin</span></button></li>
-          <li><button type="button" data-sabor="1"><span class="menu__num">02</span><span class="menu__nombre">Chocolate Old Fashioned</span><span class="menu__dest">Whisky</span></button></li>
-          <li><button type="button" data-sabor="2"><span class="menu__num">03</span><span class="menu__nombre">DDL Reserve</span><span class="menu__dest">Ron</span></button></li>
-          <li><button type="button" data-sabor="3"><span class="menu__num">04</span><span class="menu__nombre">Berry Martini</span><span class="menu__dest">Vodka</span></button></li>
-        </ol>
-        <p class="menu__bajada">Cuatro clásicos de la barra, convertidos en helado de autor.</p>
-        <img class="menu__iso" src="media/isologo-oro.png" width="611" height="700" alt="">
+    <div class="libro-escena">
+      <div class="libro" id="libro">
+        <div class="libro__pagina marco-mixo">
+          <h2 class="libro__titulo script" id="t-carta">Nuestra colección</h2>
+          <ol class="libro__lista">
+            <li><button type="button" data-sabor="0"><span class="libro__num">01</span><span class="libro__nombre">Lemon Pie Gimlet</span><span class="libro__dest">Gin</span></button></li>
+            <li><button type="button" data-sabor="1"><span class="libro__num">02</span><span class="libro__nombre">Chocolate Old Fashioned</span><span class="libro__dest">Whisky</span></button></li>
+            <li><button type="button" data-sabor="2"><span class="libro__num">03</span><span class="libro__nombre">DDL Reserve</span><span class="libro__dest">Ron</span></button></li>
+            <li><button type="button" data-sabor="3"><span class="libro__num">04</span><span class="libro__nombre">Berry Martini</span><span class="libro__dest">Vodka</span></button></li>
+          </ol>
+          <p class="libro__bajada">Cuatro clásicos de la barra, convertidos en helado de autor.<br>Tocá uno para conocerlo.</p>
+        </div>
+        <button class="libro__tapa" id="tapa" type="button" aria-label="Abrir la carta de Mixo">
+          <span class="libro__frente"><img src="media/tapa.jpg" width="896" height="1120" alt=""></span>
+          <span class="libro__dorso" aria-hidden="true"><img src="media/logo-script.png" width="1400" height="505" alt=""></span>
+        </button>
       </div>
     </div>
     <div class="carta__recorrido" id="recorrido">
@@ -686,6 +729,18 @@ a { color: inherit; }
   }
 
   if (reduce) { video.removeAttribute('autoplay'); video.pause(); raiz.classList.add('estatico'); return; }
+
+  /* ── La carta se abre al llegar a ella (o al tocar la tapa) ── */
+  var libro = document.getElementById('libro');
+  var tapa = document.getElementById('tapa');
+  function abrirCarta() { libro.classList.add('libro--abierta'); tapa.setAttribute('aria-hidden', 'true'); tapa.tabIndex = -1; }
+  tapa.addEventListener('click', abrirCarta);
+  if ('IntersectionObserver' in window) {
+    var ioLibro = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { setTimeout(abrirCarta, 350); ioLibro.disconnect(); } });
+    }, { threshold: 0.6 });
+    ioLibro.observe(libro);
+  } else abrirCarta();
 
   /* ── Carta: un sabor por vez, cambia al deslizar ── */
   var recorridoEl = document.getElementById('recorrido');
