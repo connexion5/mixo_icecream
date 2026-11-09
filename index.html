@@ -188,7 +188,7 @@ a { color: inherit; }
 }
 .libro {
   position: relative;
-  width: min(80vw, 24rem);
+  width: min(72vw, 20rem);
   aspect-ratio: 4 / 5;
   transform-style: preserve-3d;
   transition: transform 1.6s cubic-bezier(.65,0,.2,1);
@@ -198,7 +198,7 @@ a { color: inherit; }
 .libro__pagina {
   position: absolute; inset: 0;
   display: flex; flex-direction: column; align-items: center; text-align: center;
-  padding: 2.5rem 2rem 1.75rem;
+  padding: 2.25rem 1.75rem 1.5rem;
   background: url("media/papel.jpg") center / cover, #EFE8DA;
   color: #2B1B18;
   border-radius: 1px 4px 4px 1px;
@@ -217,25 +217,25 @@ a { color: inherit; }
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(90deg, rgba(60,30,15,.10), transparent 10%, transparent 88%, rgba(60,30,15,.06));
 }
-.libro__logo { width: 44%; height: auto; margin: .25rem 0 .5rem; }
+.libro__logo { width: 36%; height: auto; margin: .25rem 0 .35rem; }
 .libro__titulo {
   margin: 0 0 1.1rem;
   font-family: var(--grabado); font-weight: 400;
-  font-size: .9375rem; letter-spacing: .28em; text-transform: uppercase;
+  font-size: .75rem; letter-spacing: .3em; text-transform: uppercase;
   color: #461218;
 }
 .libro__lista { list-style: none; margin: 0; padding: 0; width: 100%; }
 .libro__lista li + li::before { content: ""; display: block; width: 2.25rem; height: 1px; margin: 0 auto; background: rgba(70,18,24,.35); }
 .libro__lista button {
   width: 100%; display: grid; gap: .1rem; justify-items: center;
-  padding: .7rem .5rem;
+  padding: .55rem .5rem;
   background: none; border: 0; color: inherit; font: inherit; cursor: pointer;
 }
-.libro__nombre { font-family: var(--grabado); font-size: clamp(1.25rem, 5vw, 1.5rem); line-height: 1.15; color: #2B1B18; transition: color .3s ease; }
-.libro__dest { font-family: var(--caps); font-size: .6875rem; letter-spacing: .2em; text-transform: uppercase; color: #6A2A30; }
+.libro__nombre { font-family: var(--grabado); font-size: clamp(1.0625rem, 4.2vw, 1.25rem); line-height: 1.15; color: #2B1B18; transition: color .3s ease; }
+.libro__dest { font-family: var(--caps); font-size: .625rem; letter-spacing: .2em; text-transform: uppercase; color: #6A2A30; }
 .libro__lista button:hover .libro__nombre, .libro__lista button:focus-visible .libro__nombre { color: #6A2A30; }
 .libro__lista button:focus-visible { outline: 1px solid #6A2A30; outline-offset: -2px; }
-.libro__bajada { margin: auto 0 0; padding-top: .75rem; font-style: italic; font-size: .875rem; color: rgba(43,27,24,.65); }
+.libro__bajada { margin: auto 0 0; padding-top: .6rem; font-style: italic; font-size: .8125rem; color: rgba(43,27,24,.65); }
 
 /* tapa de cuero con lomo y espesor */
 .libro__tapa {
@@ -273,12 +273,12 @@ a { color: inherit; }
 .libro--abierta .libro__tapa { transform: rotateY(-178deg); cursor: default; }
 
 @media (min-width: 900px) {
-  .libro { width: 24rem; }
+  .libro { width: 20rem; }
   .libro--abierta { transform: translateX(50%); }
 }
 @media (max-width: 899px) {
-  .libro { aspect-ratio: 2 / 3; width: min(82vw, 22rem); }
-  .libro__pagina { padding: 2.25rem 1.5rem 1.6rem; }
+  .libro { aspect-ratio: 5 / 7; width: min(74vw, 19rem); }
+  .libro__pagina { padding: 2rem 1.35rem 1.4rem; }
   .libro--abierta .libro__tapa { transform: rotateY(-178deg) translateX(8%); opacity: 0; transition: transform 1.6s cubic-bezier(.65,0,.2,1), opacity .5s ease 1.1s; }
 }
 .sin-js .libro__tapa, .estatico .libro__tapa { display: none; }
@@ -391,7 +391,9 @@ a { color: inherit; }
 .js .mapa__ruta { clip-path: inset(0 100% 0 0); transition: clip-path 2.2s cubic-bezier(.4,0,.2,1) .3s; }
 .js .mapa--visto .mapa__ruta { clip-path: inset(0 0 0 0); }
 .estatico .mapa__ruta { clip-path: none; }
-.estatico .cartel span { background: #F6E7C6; color: #2B1B18; }
+.estatico .cartel { transform: none; }
+.estatico .cartel__luz::before { opacity: 1; }
+.estatico .cartel__texto { color: #2B1B18; }
 .zona { margin: 1.75rem auto 0 !important; font-size: 1.1875rem !important; line-height: 1.55; color: var(--crema); max-width: 30ch; }
 .zona strong { font-weight: 400; color: var(--oro-claro); }
 
@@ -426,27 +428,69 @@ a { color: inherit; }
 .contacto__caja { position: relative; z-index: 3; max-width: 34rem; }
 .contacto h2 { font-size: clamp(2.4rem, 11vw, 5.5rem); white-space: nowrap; margin-bottom: 1rem; }
 .contacto__caja { width: 100%; }
-/* cartel ovalado como el de la barra: se enciende al llegar */
+/* cartel colgante: baja, se balancea, tiran de la cadenita y se prende */
 .cartel {
-  display: inline-block; margin: 0 auto 2.75rem !important; max-width: none !important;
+  position: relative; display: inline-block;
+  margin: 4.5rem auto 4.25rem;
+  transform-origin: 50% -90px;
+}
+.cartel__colgante {
+  position: absolute; bottom: 100%; left: 18%;
+  width: 1px; height: 90px;
+  background: linear-gradient(transparent, var(--oro) 40%);
+}
+.cartel__colgante--der { left: auto; right: 18%; }
+.cartel__marco {
+  margin: 0 !important; max-width: none !important;
   padding: .3rem; border-radius: 999px;
   background: linear-gradient(135deg, #8a6a38, var(--oro-claro) 35%, #8a6a38 60%, var(--oro) 100%);
 }
-.cartel span {
-  display: block; padding: .85rem 1.9rem; border-radius: 999px;
-  font-family: var(--grabado); font-size: clamp(1.05rem, 4.6vw, 1.5rem); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap;
-  background: #2B2620; color: rgba(240,238,233,.25);
+.cartel__luz {
+  display: flex; align-items: center; justify-content: center;
+  height: 3.6rem; padding: .2rem 2.1rem 0; border-radius: 999px;
+  font-family: var(--grabado); font-size: clamp(1.05rem, 4.6vw, 1.5rem); line-height: 1;
+  letter-spacing: .08em; text-transform: uppercase; white-space: nowrap;
+  position: relative; overflow: hidden;
+  background: #2B2620;
   box-shadow: inset 0 0 12px rgba(0,0,0,.6);
-  transition: background-color .2s, color .2s, box-shadow .2s;
 }
-.cartel--encendido span {
+.cartel__luz::before { /* capa de luz encendida */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: 0;
   background: radial-gradient(120% 140% at 50% 50%, #FFF8E8, #F6E7C6 70%, #E9D3A4);
-  color: #2B1B18;
-  box-shadow: inset 0 0 18px rgba(255,214,150,.6), 0 0 28px rgba(255,214,150,.45), 0 0 80px rgba(255,200,120,.25);
-  animation: prender 1.1s steps(1) both;
+  box-shadow: inset 0 0 18px rgba(255,214,150,.6);
+}
+.cartel__texto { position: relative; color: rgba(240,238,233,.28); }
+.cartel__marco { transition: box-shadow .3s ease; }
+.cartel__cadena {
+  position: absolute; top: calc(100% - 2px); right: 11%;
+  width: 12px; height: 54px;
+  transform-origin: top center;
+}
+.cartel__cadena svg { width: 100%; height: 100%; overflow: visible; }
+.cartel__cadena line { stroke: var(--oro); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: .1 4.2; }
+.cartel__cadena circle { fill: var(--oro-claro); }
+
+.js .cartel { transform: translateY(-120vh); }
+.js .cartel--baja { animation: bajar 2.6s both; }
+@keyframes bajar {
+  0%   { transform: translateY(-60vh) rotate(0); animation-timing-function: cubic-bezier(.3,.8,.4,1); }
+  42%  { transform: translateY(0) rotate(0); animation-timing-function: ease-in-out; }
+  55%  { transform: translateY(0) rotate(2.6deg); animation-timing-function: ease-in-out; }
+  70%  { transform: translateY(0) rotate(-1.7deg); animation-timing-function: ease-in-out; }
+  85%  { transform: translateY(0) rotate(.8deg); animation-timing-function: ease-in-out; }
+  100% { transform: translateY(0) rotate(0); }
+}
+.cartel--tira .cartel__cadena { animation: tirar .6s cubic-bezier(.4,0,.2,1); }
+@keyframes tirar { 0% { transform: scaleY(1); } 45% { transform: scaleY(1.28); } 100% { transform: scaleY(1); } }
+
+.cartel--encendido .cartel__luz::before { animation: prender 1s steps(1) both; }
+.cartel--encendido .cartel__texto { animation: prender-texto 1s steps(1) both; }
+.cartel--encendido .cartel__marco { box-shadow: 0 0 28px rgba(255,214,150,.45), 0 0 80px rgba(255,200,120,.25); }
+@keyframes prender-texto {
+  0% { color: rgba(240,238,233,.28); } 8% { color: #2B1B18; } 14% { color: rgba(240,238,233,.28); } 22% { color: #2B1B18; } 30% { color: rgba(240,238,233,.28); } 38%, 100% { color: #2B1B18; }
 }
 @keyframes prender {
-  0% { opacity: .2; } 8% { opacity: 1; } 14% { opacity: .3; } 22% { opacity: 1; } 30% { opacity: .5; } 38%, 100% { opacity: 1; }
+  0% { opacity: 0; } 8% { opacity: 1; } 14% { opacity: 0; } 22% { opacity: 1; } 30% { opacity: .15; } 38%, 100% { opacity: 1; }
 }
 .contacto p { margin: 0 auto; max-width: 24ch; font-size: 1.375rem; line-height: 1.5; }
 .acciones { display: grid; gap: .875rem; margin: 3rem auto 0; max-width: 20rem; }
@@ -688,7 +732,12 @@ a { color: inherit; }
   <section class="contacto marco-mixo" id="contacto" aria-labelledby="t-contacto">
     <div class="contacto__fondo" data-parallax="-0.15"><img src="media/barra.jpg" alt="" loading="lazy"></div>
     <div class="contacto__caja">
-      <p class="cartel" id="cartel"><span>La barra está abierta</span></p>
+      <div class="cartel" id="cartel">
+        <span class="cartel__colgante" aria-hidden="true"></span>
+        <span class="cartel__colgante cartel__colgante--der" aria-hidden="true"></span>
+        <p class="cartel__marco"><span class="cartel__luz"><span class="cartel__texto">La barra está abierta</span></span></p>
+        <span class="cartel__cadena" aria-hidden="true"><svg viewBox="0 0 12 70"><line x1="6" y1="0" x2="6" y2="54"/><circle cx="6" cy="61" r="5"/></svg></span>
+      </div>
       <h2 class="script" id="t-contacto">¿Ya tenés tu fecha?</h2>
       <p>Contanos tu evento y armamos la propuesta.</p>
       <form class="consulta" id="consulta" novalidate>
@@ -830,12 +879,18 @@ a { color: inherit; }
     var ioVer = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         if (!e.isIntersecting) return;
-        e.target.classList.add(e.target.id === 'mapa' ? 'mapa--visto' : 'cartel--encendido');
+        var t = e.target;
+        if (t.id === 'mapa') t.classList.add('mapa--visto');
+        else { t = document.getElementById('cartel');
+          t.classList.add('cartel--baja');
+          setTimeout(function () { t.classList.add('cartel--tira'); }, 2300);
+          setTimeout(function () { t.classList.add('cartel--encendido'); }, 2600);
+        }
         ioVer.unobserve(e.target);
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.25 });
     ioVer.observe(document.getElementById('mapa'));
-    ioVer.observe(document.getElementById('cartel'));
+    ioVer.observe(document.querySelector('.contacto__caja'));
   }
 
   /* ── La carta se abre al llegar a ella (o al tocar la tapa) ── */
