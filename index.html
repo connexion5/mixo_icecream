@@ -169,78 +169,120 @@ a { color: inherit; }
 .frase__bajada { margin: 1.75rem auto 0; max-width: 30ch; font-size: 1.1875rem; color: var(--crema-suave); }
 .frase__firma { margin-top: 1.25rem !important; font-size: clamp(2.25rem, 9vw, 3.5rem); }
 
-/* ───────── La carta (recorrido horizontal) ───────── */
+/* ───────── La carta: tarjeta de bar + sabores de a uno ───────── */
 .carta { position: relative; }
-.carta__escena { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; flex-direction: column; }
-.carta__pista { display: flex; height: 100%; will-change: transform; }
-.panel {
-  flex: 0 0 100vw; height: 100%;
-  display: grid; align-content: center;
-  padding: max(3.5rem, env(safe-area-inset-top)) var(--margen) 3rem;
+.menu { padding: clamp(2rem, 6vw, 5rem) clamp(.75rem, 3vw, 3rem); }
+.menu__tarjeta {
+  --marco-inset: 8px;
+  max-width: 46rem; margin: 0 auto;
+  background:
+    radial-gradient(120% 80% at 30% 0%, rgba(255,255,255,.035), transparent 60%),
+    var(--bordo);
+  padding: clamp(3.5rem, 9vw, 5.5rem) clamp(2rem, 7vw, 4.5rem) clamp(3rem, 8vw, 4.5rem);
 }
-.panel--intro { justify-items: center; text-align: center; }
-.panel--intro h2 { font-size: clamp(4rem, 17vw, 8rem); }
-.panel--intro p { margin: 1.75rem auto 0; max-width: 26ch; font-size: 1.125rem; }
-.panel--intro .pista-texto { margin-top: 2.5rem; font-style: italic; color: var(--oro-claro); font-size: .9375rem; }
+.menu__titulo {
+  margin: 0;
+  font-family: var(--caps); font-weight: 500;
+  font-size: .9375rem; letter-spacing: .32em;
+  color: var(--crema-suave);
+}
+.menu__logo { width: min(62%, 300px); height: auto; margin: 2.25rem 0 3rem; }
+.menu__lista { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(240,238,233,.16); }
+.menu__lista li { border-bottom: 1px solid rgba(240,238,233,.16); }
+.menu__lista button {
+  width: 100%;
+  display: grid; grid-template-columns: 2.75rem 1fr auto; align-items: baseline; gap: .75rem;
+  padding: 1.15rem 0;
+  background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.menu__num { font-family: var(--caps); font-size: .875rem; letter-spacing: .14em; color: var(--crema-suave); }
+.menu__nombre {
+  font-family: var(--grabado); font-size: clamp(1.375rem, 5.6vw, 2rem); line-height: 1.2;
+  color: var(--crema);
+  transition: color .3s ease;
+}
+.menu__dest { font-family: var(--caps); font-size: .8125rem; letter-spacing: .22em; color: var(--crema-suave); text-transform: uppercase; }
+.menu__lista button:hover .menu__nombre, .menu__lista button:focus-visible .menu__nombre { color: var(--oro-claro); }
+.menu__lista button:focus-visible { outline-offset: -2px; }
+.menu__bajada { margin: 2.25rem 0 0; font-style: italic; font-size: 1.1875rem; line-height: 1.55; color: var(--crema-suave); max-width: 26ch; }
+.menu__iso { display: block; width: 84px; height: auto; margin: 3rem auto 0; }
+.carta__recorrido { position: relative; }
+.carta__escena { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.carta__marcas {
+  position: absolute; left: 50%; top: max(1.75rem, calc(env(safe-area-inset-top) + .75rem)); z-index: 3;
+  transform: translateX(-50%);
+  display: flex; gap: .5rem; list-style: none; margin: 0; padding: 0;
+}
+.carta__marcas li { width: 2.25rem; height: 1px; background: rgba(194,158,98,.3); transition: background-color .5s ease; }
+.carta__marcas li.activa { background: var(--oro); }
 
-.trago { position: relative; justify-items: center; text-align: center; gap: 1.25rem; }
-.trago__gigante {
-  position: absolute; top: 50%; left: 0; z-index: -1;
-  margin: 0; white-space: nowrap; pointer-events: none;
-  font-family: var(--grabado); font-weight: 400;
-  font-size: clamp(7rem, 34vw, 19rem); line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(194,158,98,.3);
-  transform: translate3d(0,-60%,0);
-  will-change: transform;
+.trago {
+  position: absolute; inset: 0;
+  display: grid; align-content: center; justify-items: center; text-align: center; gap: 1.5rem;
+  padding: 4.5rem var(--margen) 5rem;
+  pointer-events: none;
 }
-.sello {
-  position: absolute; right: -16px; bottom: -30px; z-index: 2;
-  width: 96px; height: 96px;
-  will-change: transform;
-}
-.sello svg { width: 100%; height: 100%; overflow: visible; }
-.sello text { font-family: var(--caps); font-weight: 500; font-size: 9.5px; letter-spacing: .5px; fill: var(--oro-claro); }
-.sello .sello__m { font-family: var(--grabado); font-size: 34px; letter-spacing: 0; fill: var(--crema); }
-.inspira { margin: -.15rem auto .6rem !important; font-style: italic; font-size: .9375rem; color: var(--plata); }
+.trago.activo { pointer-events: auto; }
 .trago__foto {
-  position: relative; z-index: 1;
-  height: min(48svh, 104vw);
+  position: relative;
+  height: min(46svh, 100vw);
   aspect-ratio: 4 / 5;
   outline: 1px solid var(--linea); outline-offset: 10px;
-  will-change: transform;
 }
 .trago__foto img { width: 100%; height: 100%; object-fit: cover; }
+.trago__texto { max-width: 34rem; }
 .trago h3 {
-  margin: .5rem 0 .5rem;
+  margin: .25rem 0 .4rem;
   font-family: var(--grabado); font-weight: 400;
-  font-size: clamp(1.625rem, 6.5vw, 2.75rem);
+  font-size: clamp(1.75rem, 7vw, 2.75rem);
   letter-spacing: .03em; line-height: 1.15;
   color: var(--crema);
 }
 .trago p { margin: 0 auto; max-width: 34ch; }
 .trago .ritual { margin-top: .6rem; font-style: italic; color: var(--oro-claro); }
+.inspira { margin: 0 auto .6rem !important; font-style: italic; font-size: .9375rem; color: var(--plata); }
+
+/* estados: entra desde abajo, sale hacia arriba, siempre un solo sabor completo en pantalla */
+.js .trago__foto, .js .trago__texto {
+  opacity: 0;
+  /* al salir: rápido, para que nunca se mezclen dos sabores */
+  transition: opacity .3s ease, transform .5s cubic-bezier(.4,0,.2,1), filter .4s ease;
+}
+.js .trago__foto { transform: translate3d(0,48px,0) scale(.94); filter: blur(8px); }
+.js .trago__texto { transform: translate3d(0,28px,0); }
+.js .trago.paso .trago__foto { transform: translate3d(0,-40px,0) scale(.96); filter: blur(6px); }
+.js .trago.paso .trago__texto { transform: translate3d(0,-24px,0); }
+.js .trago.activo .trago__foto, .js .trago.activo .trago__texto {
+  opacity: 1; transform: none; filter: none;
+  transition: opacity .8s cubic-bezier(.2,.7,.1,1) .22s, transform .9s cubic-bezier(.2,.7,.1,1) .22s, filter .9s cubic-bezier(.2,.7,.1,1) .22s;
+}
+.js .trago.activo .trago__texto { transition-delay: .34s; }
+
+.sello {
+  position: absolute; right: -18px; bottom: -30px; z-index: 2;
+  width: 96px; height: 96px;
+}
+.sello svg { width: 100%; height: 100%; overflow: visible; }
+.sello__anillo { transform-origin: 60px 60px; will-change: transform; }
+.sello text { font-family: var(--caps); font-weight: 500; font-size: 9.5px; letter-spacing: .5px; fill: var(--oro-claro); }
+.sello .sello__m { font-family: var(--grabado); font-size: 34px; letter-spacing: 0; fill: var(--crema); }
 
 @media (min-width: 900px) {
-  .panel { flex-basis: 78vw; }
-  .panel--intro { flex-basis: 60vw; }
-  .trago { grid-template-columns: auto 1fr; justify-items: start; align-items: center; text-align: left; gap: 4.5rem; }
-  .trago__foto { height: 72svh; }
+  .trago { grid-template-columns: auto 30rem; justify-content: center; align-items: center; text-align: left; gap: 5rem; }
+  .trago__foto { height: 70svh; }
+  .trago p, .inspira { margin-left: 0 !important; margin-right: 0 !important; font-size: 1.125rem; }
   .sello { width: 140px; height: 140px; right: -48px; bottom: -40px; }
-  .trago__gigante { -webkit-text-stroke-color: rgba(194,158,98,.2); }
-  .inspira { margin: -.15rem 0 .6rem !important; }
-  .trago p { margin: 0; font-size: 1.125rem; }
+  .js .trago__foto { transform: translate3d(-40px,0,0) scale(.96); }
+  .js .trago__texto { transform: translate3d(40px,0,0); }
+  .js .trago.paso .trago__foto { transform: translate3d(40px,0,0) scale(.96); }
+  .js .trago.paso .trago__texto { transform: translate3d(-40px,0,0); }
 }
-.carta__avance {
-  position: absolute; left: var(--margen); right: var(--margen); top: max(1.5rem, env(safe-area-inset-top));
-  height: 1px; background: rgba(194,158,98,.2);
-}
-.carta__avance span { display: block; height: 100%; width: 100%; background: var(--oro); transform-origin: left; transform: scaleX(0); }
 
+/* Sin JS o con movimiento reducido: los cuatro en columna */
 .sin-js .carta__escena, .estatico .carta__escena { position: static; height: auto; }
-.sin-js .carta__pista, .estatico .carta__pista { flex-direction: column; height: auto; transform: none !important; }
-.sin-js .panel, .estatico .panel { flex-basis: auto; height: auto; padding-top: 4rem; padding-bottom: 4rem; }
-.sin-js .carta__avance, .estatico .carta__avance, .sin-js .pista-texto, .estatico .pista-texto { display: none; }
+.sin-js .trago, .estatico .trago { position: static; padding: 3rem var(--margen); pointer-events: auto; }
+.sin-js .carta__marcas, .estatico .carta__marcas { display: none; }
+.estatico .trago__foto, .estatico .trago__texto { opacity: 1 !important; transform: none !important; filter: none !important; }
 
 /* ───────── En tu evento ───────── */
 .evento { padding: clamp(6rem, 14vw, 10rem) var(--margen) 0; max-width: 78rem; margin: 0 auto; }
@@ -394,37 +436,29 @@ a { color: inherit; }
   </div>
 
   <section class="carta" id="carta" aria-labelledby="t-carta">
-    <div class="carta__escena">
-      <div class="carta__pista" id="pista">
-
-        <div class="panel panel--intro">
-          <h2 class="script" id="t-carta">La carta</h2>
-          <p>Cuatro clásicos de la barra, cada uno con su ritual.</p>
-          <p class="pista-texto">Seguí bajando para recorrerla</p>
-        </div>
-
-        <article class="panel trago">
-          <div class="trago__gigante" aria-hidden="true">Chocolate Old Fashioned</div>
-          <div class="trago__foto">
-            <img src="media/old-fashioned.jpg" alt="Chocolate Old Fashioned en vaso tallado" loading="lazy">
-            <div class="sello" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#141414" stroke="#C29E62" stroke-width="1"/><circle cx="60" cy="60" r="35" fill="none" stroke="#C29E62" stroke-opacity=".45" stroke-width=".75"/><text><textPath href="#anillo" textLength="282" lengthAdjust="spacing">WHISKY ICE CREAM · MIXO · WHISKY ICE CREAM · MIXO · </textPath></text><text class="sello__m" x="60" y="72" text-anchor="middle">M</text></svg></div>
-          </div>
-          <div>
-            <h3>Chocolate Old Fashioned</h3>
-            <p class="inspira">Inspirado en el clásico Old Fashioned.</p>
-            <p>Helado de chocolate amargo infusionado con whisky, con crocante de maní y almendras en cada cucharada.</p>
-            <p class="ritual">Se termina con ralladura de naranja y un ahumado al momento de servir.</p>
-            <p class="visually-hidden">Whisky ice cream.</p>
-          </div>
-        </article>
-
-        <article class="panel trago">
-          <div class="trago__gigante" aria-hidden="true">Lemon Pie Gimlet</div>
+    <div class="menu">
+      <div class="menu__tarjeta marco-mixo">
+        <h2 class="menu__titulo" id="t-carta">La carta</h2>
+        <img class="menu__logo" src="media/logo-script.png" width="1400" height="505" alt="Mixo">
+        <ol class="menu__lista">
+          <li><button type="button" data-sabor="0"><span class="menu__num">01</span><span class="menu__nombre">Lemon Pie Gimlet</span><span class="menu__dest">Gin</span></button></li>
+          <li><button type="button" data-sabor="1"><span class="menu__num">02</span><span class="menu__nombre">Chocolate Old Fashioned</span><span class="menu__dest">Whisky</span></button></li>
+          <li><button type="button" data-sabor="2"><span class="menu__num">03</span><span class="menu__nombre">DDL Reserve</span><span class="menu__dest">Ron</span></button></li>
+          <li><button type="button" data-sabor="3"><span class="menu__num">04</span><span class="menu__nombre">Berry Martini</span><span class="menu__dest">Vodka</span></button></li>
+        </ol>
+        <p class="menu__bajada">Cuatro clásicos de la barra, convertidos en helado de autor.</p>
+        <img class="menu__iso" src="media/isologo-oro.png" width="611" height="700" alt="">
+      </div>
+    </div>
+    <div class="carta__recorrido" id="recorrido">
+      <div class="carta__escena">
+        <ol class="carta__marcas" aria-hidden="true"><li></li><li></li><li></li><li></li></ol>
+        <article class="trago">
           <div class="trago__foto">
             <img src="media/lemon-pie-gimlet.jpg" alt="Lemon Pie Gimlet en copa con merengue" loading="lazy">
-            <div class="sello" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#141414" stroke="#C29E62" stroke-width="1"/><circle cx="60" cy="60" r="35" fill="none" stroke="#C29E62" stroke-opacity=".45" stroke-width=".75"/><text><textPath href="#anillo" textLength="282" lengthAdjust="spacing">GIN ICE CREAM · MIXO · GIN ICE CREAM · MIXO · </textPath></text><text class="sello__m" x="60" y="72" text-anchor="middle">M</text></svg></div>
+            <div class="sello" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#141414" stroke="#C29E62" stroke-width="1"/><circle cx="60" cy="60" r="35" fill="none" stroke="#C29E62" stroke-opacity=".45" stroke-width=".75"/><g class="sello__anillo"><text><textPath href="#anillo" textLength="282" lengthAdjust="spacing">GIN ICE CREAM · MIXO · GIN ICE CREAM · MIXO · </textPath></text></g><text class="sello__m" x="60" y="72" text-anchor="middle">M</text></svg></div>
           </div>
-          <div>
+          <div class="trago__texto">
             <h3>Lemon Pie Gimlet</h3>
             <p class="inspira">Inspirado en el Gimlet.</p>
             <p>Helado cremoso de limón infusionado con gin, coronado con merengue italiano.</p>
@@ -433,13 +467,26 @@ a { color: inherit; }
           </div>
         </article>
 
-        <article class="panel trago">
-          <div class="trago__gigante" aria-hidden="true">DDL Reserve</div>
+        <article class="trago">
+          <div class="trago__foto">
+            <img src="media/old-fashioned.jpg" alt="Chocolate Old Fashioned en vaso tallado" loading="lazy">
+            <div class="sello" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#141414" stroke="#C29E62" stroke-width="1"/><circle cx="60" cy="60" r="35" fill="none" stroke="#C29E62" stroke-opacity=".45" stroke-width=".75"/><g class="sello__anillo"><text><textPath href="#anillo" textLength="282" lengthAdjust="spacing">WHISKY ICE CREAM · MIXO · WHISKY ICE CREAM · MIXO · </textPath></text></g><text class="sello__m" x="60" y="72" text-anchor="middle">M</text></svg></div>
+          </div>
+          <div class="trago__texto">
+            <h3>Chocolate Old Fashioned</h3>
+            <p class="inspira">Inspirado en el clásico Old Fashioned.</p>
+            <p>Helado de chocolate amargo infusionado con whisky, con crocante de maní y almendras en cada cucharada.</p>
+            <p class="ritual">Se termina con ralladura de naranja y un ahumado al momento de servir.</p>
+            <p class="visually-hidden">Whisky ice cream.</p>
+          </div>
+        </article>
+
+        <article class="trago">
           <div class="trago__foto">
             <img src="media/ddl-reserve.jpg" alt="DDL Reserve con dulce de leche" loading="lazy">
-            <div class="sello" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#141414" stroke="#C29E62" stroke-width="1"/><circle cx="60" cy="60" r="35" fill="none" stroke="#C29E62" stroke-opacity=".45" stroke-width=".75"/><text><textPath href="#anillo" textLength="282" lengthAdjust="spacing">RON ICE CREAM · MIXO · RON ICE CREAM · MIXO · </textPath></text><text class="sello__m" x="60" y="72" text-anchor="middle">M</text></svg></div>
+            <div class="sello" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#141414" stroke="#C29E62" stroke-width="1"/><circle cx="60" cy="60" r="35" fill="none" stroke="#C29E62" stroke-opacity=".45" stroke-width=".75"/><g class="sello__anillo"><text><textPath href="#anillo" textLength="282" lengthAdjust="spacing">RON ICE CREAM · MIXO · RON ICE CREAM · MIXO · </textPath></text></g><text class="sello__m" x="60" y="72" text-anchor="middle">M</text></svg></div>
           </div>
-          <div>
+          <div class="trago__texto">
             <h3>DDL Reserve</h3>
             <p>Helado de dulce de leche artesanal infusionado con ron, con granizado de chocolate negro.</p>
             <p class="ritual">Se termina con una decoración de dulce de leche.</p>
@@ -447,13 +494,12 @@ a { color: inherit; }
           </div>
         </article>
 
-        <article class="panel trago">
-          <div class="trago__gigante" aria-hidden="true">Berry Martini</div>
+        <article class="trago">
           <div class="trago__foto">
             <img src="media/berry-martini.jpg" alt="Berry Martini en copa con pincho de frutos rojos" loading="lazy">
-            <div class="sello" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#141414" stroke="#C29E62" stroke-width="1"/><circle cx="60" cy="60" r="35" fill="none" stroke="#C29E62" stroke-opacity=".45" stroke-width=".75"/><text><textPath href="#anillo" textLength="282" lengthAdjust="spacing">VODKA ICE CREAM · MIXO · VODKA ICE CREAM · MIXO · </textPath></text><text class="sello__m" x="60" y="72" text-anchor="middle">M</text></svg></div>
+            <div class="sello" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#141414" stroke="#C29E62" stroke-width="1"/><circle cx="60" cy="60" r="35" fill="none" stroke="#C29E62" stroke-opacity=".45" stroke-width=".75"/><g class="sello__anillo"><text><textPath href="#anillo" textLength="282" lengthAdjust="spacing">VODKA ICE CREAM · MIXO · VODKA ICE CREAM · MIXO · </textPath></text></g><text class="sello__m" x="60" y="72" text-anchor="middle">M</text></svg></div>
           </div>
-          <div>
+          <div class="trago__texto">
             <h3>Berry Martini</h3>
             <p class="inspira">Inspirado en el Martini.</p>
             <p>Helado de americana infusionado con vodka, con frutos rojos y granizado de chocolate blanco.</p>
@@ -461,9 +507,7 @@ a { color: inherit; }
             <p class="visually-hidden">Vodka ice cream.</p>
           </div>
         </article>
-
       </div>
-      <div class="carta__avance" aria-hidden="true"><span id="avance"></span></div>
     </div>
   </section>
 
@@ -643,17 +687,32 @@ a { color: inherit; }
 
   if (reduce) { video.removeAttribute('autoplay'); video.pause(); raiz.classList.add('estatico'); return; }
 
-  /* ── Carta: el scroll vertical la recorre de costado ── */
-  var carta = document.getElementById('carta');
-  var pista = document.getElementById('pista');
-  var avance = document.getElementById('avance');
-  var fotos = Array.prototype.slice.call(document.querySelectorAll('.trago__foto'));
-  var gigantes = Array.prototype.slice.call(document.querySelectorAll('.trago__gigante'));
-  var sellos = Array.prototype.slice.call(document.querySelectorAll('.sello'));
-  var recorrido = 0;
+  /* ── Carta: un sabor por vez, cambia al deslizar ── */
+  var recorridoEl = document.getElementById('recorrido');
+  var tragos = Array.prototype.slice.call(document.querySelectorAll('.trago'));
+  var marcas = Array.prototype.slice.call(document.querySelectorAll('.carta__marcas li'));
+  var anillos = Array.prototype.slice.call(document.querySelectorAll('.sello__anillo'));
+  var actual = -1;
   function medir() {
-    recorrido = Math.max(0, pista.scrollWidth - window.innerWidth);
-    carta.style.height = (recorrido + window.innerHeight) + 'px';
+    // cada sabor ocupa un tramo de 80% de pantalla de scroll
+    recorridoEl.style.height = (window.innerHeight * (1 + tragos.length * 0.8)) + 'px';
+  }
+  Array.prototype.slice.call(document.querySelectorAll('[data-sabor]')).forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = parseInt(b.dataset.sabor, 10);
+      var top = recorridoEl.getBoundingClientRect().top + window.scrollY;
+      var total = recorridoEl.offsetHeight - window.innerHeight;
+      window.scrollTo({ top: top + total * (k + .5) / tragos.length, behavior: 'smooth' });
+    });
+  });
+  function mostrar(n) {
+    if (n === actual) return; actual = n;
+    tragos.forEach(function (t, k) {
+      t.classList.toggle('activo', k === n);
+      t.classList.toggle('paso', k < n);
+      t.setAttribute('aria-hidden', k === n ? 'false' : 'true');
+    });
+    marcas.forEach(function (m, k) { m.classList.toggle('activa', k === n); });
   }
 
   var paralaje = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
@@ -665,21 +724,11 @@ a { color: inherit; }
     pendiente = false;
     var vh = window.innerHeight, vw = window.innerWidth;
 
-    var r = carta.getBoundingClientRect();
-    var p = recorrido ? Math.min(1, Math.max(0, -r.top / recorrido)) : 0;
-    pista.style.transform = 'translate3d(' + (-p * recorrido) + 'px,0,0)';
-    avance.style.transform = 'scaleX(' + p + ')';
-    fotos.forEach(function (f) {
-      var b = f.getBoundingClientRect();
-      var d = Math.min(1, Math.abs(b.left + b.width / 2 - vw / 2) / vw);
-      f.style.transform = 'scale(' + (1 - d * 0.22) + ')';
-      f.style.opacity = 1 - d * 0.6;
-    });
-    gigantes.forEach(function (g) {
-      var b = g.parentNode.getBoundingClientRect();
-      g.style.transform = 'translate3d(' + (-b.left * 0.55) + 'px,-60%,0)';
-    });
-    sellos.forEach(function (el) { el.style.transform = 'rotate(' + (p * 540) + 'deg)'; });
+    var r = recorridoEl.getBoundingClientRect();
+    var total = r.height - vh;
+    var p = total > 0 ? Math.min(.999, Math.max(0, -r.top / total)) : 0;
+    mostrar(Math.floor(p * tragos.length));
+    anillos.forEach(function (g) { g.style.transform = 'rotate(' + (p * 360) + 'deg)'; });
 
     paralaje.forEach(function (el) {
       var b = el.parentNode.getBoundingClientRect();
