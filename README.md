@@ -1,4 +1,4 @@
-# Mixo · sitio web
+# Mixo · sitio web (connexion5.github.io/mixo_icecream)
 
 Portada con video, qué es Mixo, la carta (recorrido horizontal), En tu evento con galería, y contacto.
 
