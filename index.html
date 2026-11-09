@@ -3,26 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mixo | Heladería de autor inspirada en la alta coctelería</title>
-<meta name="description" content="Helados de autor infusionados con su propio destilado, servidos en barra en tu evento.">
-<meta name="theme-color" content="#000000">
+<title>Mixo | Ice Cream Cocktails</title>
+<meta name="description" content="Heladería de autor inspirada en la alta coctelería. Helados infusionados con su propio destilado, servidos en barra en tu evento.">
+<meta name="theme-color" content="#141414">
 
 <!-- Vista previa al compartir el link por WhatsApp -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mixo">
+<meta property="og:title" content="Mixo | Ice Cream Cocktails">
 <meta property="og:description" content="Heladería de autor inspirada en la alta coctelería. Una experiencia dentro de tu evento.">
 <meta property="og:image" content="https://connexion5.github.io/mixo/media/compartir.jpg">
 <meta property="og:url" content="https://connexion5.github.io/mixo/">
 
 <link rel="preload" href="fonts/cormorant-sc-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon-script-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="media/logo.png" as="image">
 <link rel="preload" href="media/portada.jpg" as="image">
 
 <script>document.documentElement.classList.replace('sin-js','js');</script>
 
 <style>
-/* Tipografías del manual: en iPhone y Mac se usan Copperplate y Baskerville originales.
-   En el resto entran sus equivalentes. Para usar Altesse, subir fonts/altesse.woff2 */
+/* Tipografías del manual de marca:
+   Logo: Altesse Std (va como imagen) · Decorativa/texto: Copperplate · Texto: Baskerville · Decorativa: Academy Engraved LET.
+   En iPhone y Mac se usan las originales. En el resto entran sus equivalentes web.
+   Para usar Altesse en los títulos, subir el archivo con licencia web a fonts/altesse.woff2 */
 @font-face { font-family: "Altesse"; src: url("fonts/altesse.woff2") format("woff2"); font-display: swap; }
 @font-face { font-family: "Mixo Script"; src: url("fonts/pinyon-script-latin-400-normal.woff2") format("woff2"); font-display: swap; }
 @font-face { font-family: "Mixo Caps"; src: url("fonts/cormorant-sc-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
@@ -31,28 +34,31 @@
 @font-face { font-family: "Mixo Serif"; src: url("fonts/libre-baskerville-latin-400-italic.woff2") format("woff2"); font-style: italic; font-display: swap; }
 
 :root {
-  --negro: #000000;
-  --oro: #C6A15B;
-  --oro-claro: #E4CF9E;
-  --marfil: #EAE2D0;
-  --marfil-suave: rgba(234,226,208,.72);
-  --bordo: #5C1424;
-  --bordo-hondo: #2E0709;
-  --linea: rgba(198,161,91,.35);
+  /* Paleta del manual */
+  --negro: #141414;
+  --crema: #F0EEE9;
+  --crema-suave: rgba(240,238,233,.7);
+  --bordo: #3B0F12;
+  --plata: #B5B4B0;
+  --oro: #C29E62;        /* dorado heritage */
+  --oro-claro: #D3B780;
+  --linea: rgba(194,158,98,.35);
 
-  --script: "Altesse", "Mixo Script", cursive;
+  --script: "Altesse Std", "Altesse", "Mixo Script", cursive;
   --caps: "Copperplate", "Copperplate Gothic Light", "Mixo Caps", serif;
+  --grabado: "Academy Engraved LET", "Mixo Caps", serif;
   --serif: "Baskerville", "Mixo Serif", Georgia, serif;
 
   --margen: clamp(1.5rem, 5vw, 5rem);
+  --marco-mixo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120' fill='none' stroke='%23F0EEE9' stroke-opacity='.5' stroke-width='1'%3E%3Cpath d='M24 6H96A18 18 0 0 0 114 24V96A18 18 0 0 0 96 114H24A18 18 0 0 0 6 96V24A18 18 0 0 0 24 6Z'/%3E%3Cpath d='M13 13H107V107H13Z' stroke-opacity='.3'/%3E%3C/svg%3E");
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { background: var(--negro); -webkit-text-size-adjust: 100%; }
+html { background: var(--negro); -webkit-text-size-adjust: 100%; scrollbar-color: #3a2f1e var(--negro); caret-color: var(--oro); }
 body {
   margin: 0;
   background: var(--negro);
-  color: var(--marfil);
+  color: var(--crema);
   font-family: var(--serif);
   font-size: 1.0625rem;
   line-height: 1.75;
@@ -61,100 +67,87 @@ body {
   overflow-x: clip;
 }
 img, video { display: block; max-width: 100%; }
-::selection { background: var(--oro); color: #000; }
-html { scrollbar-color: #3a2a12 #000; caret-color: var(--oro); }
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #000; }
-::-webkit-scrollbar-thumb { background: #3a2a12; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--oro-claro); outline-offset: 4px; }
+::selection { background: var(--oro); color: var(--negro); }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--negro); }
+::-webkit-scrollbar-thumb { background: #3a2f1e; }
 
-.script {
-  font-family: var(--script);
-  font-weight: 400;
-  color: var(--oro);
-  line-height: 1;
-  margin: 0;
-}
-.caps {
-  font-family: var(--caps);
-  font-weight: 500;
-  color: var(--oro);
+.script { font-family: var(--script); font-weight: 400; color: var(--oro); line-height: 1; margin: 0; }
+
+/* Marco de la marca: doble línea con esquinas curvas, como en el manual */
+.marco-mixo { position: relative; }
+.marco-mixo::before {
+  content: ""; position: absolute; inset: var(--marco-inset, 12px); z-index: 2;
+  border: 30px solid transparent;
+  border-image: var(--marco-mixo) 30 / 30px stretch;
+  pointer-events: none;
 }
 
-/* ───────── Telón de entrada ───────── */
+/* ───────── Telón + humo de entrada ───────── */
 .telon {
   position: fixed; inset: 0; z-index: 50;
   display: grid; grid-template-columns: 1fr 1fr;
   pointer-events: none;
 }
-.sin-js .telon { display: none; }
+.sin-js .telon, .sin-js .humo { display: none; }
 .telon__paño {
-  height: 100%;
   position: relative;
   background:
-    /* luz cenital y sombra al piso */
     radial-gradient(120% 60% at 50% -10%, rgba(255,190,170,.10), transparent 60%),
     linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 72%, rgba(0,0,0,.8) 100%),
-    /* pliegues de distinto ancho, como cae una tela pesada */
     linear-gradient(90deg,
-      #1E0408 0%, #4A0F1B 4%, #7A2236 7.5%, #4E101D 11%, #22050A 14%,
-      #5A1424 19%, #8A2A40 22%, #5C1526 25%, #24060B 29%,
-      #4A0F1B 33%, #6E1C31 38%, #3A0B15 41%, #1C0407 44%,
-      #561322 50%, #842840 54%, #561322 57%, #20050A 61%,
-      #4E101D 66%, #77233A 70%, #43101C 73%, #1E0408 76%,
-      #5A1424 82%, #8A2A40 86%, #4A0F1B 90%, #22050A 95%, #3A0B15 100%);
-  transition: transform 2.4s cubic-bezier(.76,0,.16,1);
+      #1A0507 0%, #3B0F12 4%, #6A1C26 7.5%, #42111A 11%, #1E0608 14%,
+      #4C1218 19%, #7A2532 22%, #4E131B 25%, #200609 29%,
+      #3B0F12 33%, #5E1922 38%, #330C11 41%, #180405 44%,
+      #48121A 50%, #74222F 54%, #48121A 57%, #1C0507 61%,
+      #42111A 66%, #682029 70%, #3A0F14 73%, #1A0507 76%,
+      #4C1218 82%, #7A2532 86%, #3B0F12 90%, #1E0608 95%, #330C11 100%);
+  transition: transform 2.6s cubic-bezier(.76,0,.16,1);
 }
-.telon__paño::after { /* fleco dorado */
+.telon__paño::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
   background: linear-gradient(90deg, #7d6232, var(--oro-claro) 30%, var(--oro) 60%, #7d6232);
 }
-.telon__paño--der { transform: scaleX(-1); }
-.telon--abierto .telon__paño--der { transform: translateX(102%) scaleX(-1); }
 .telon__paño--izq, .telon__paño--der { box-shadow: inset -1px 0 0 var(--linea); }
+.telon__paño--der { transform: scaleX(-1); }
 .telon--abierto .telon__paño--izq { transform: translateX(-102%); }
+.telon--abierto .telon__paño--der { transform: translateX(102%) scaleX(-1); }
 .telon--fuera { display: none; }
+
+.humo {
+  position: fixed; inset: 0; z-index: 45;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
 
 /* ───────── Portada ───────── */
 .portada {
+  --marco-inset: 10px;
   position: relative;
   height: 100svh;
   min-height: 560px;
   overflow: hidden;
   display: grid;
 }
-.portada__video {
-  position: absolute; inset: 0;
-  will-change: transform;
-}
-.portada__video video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: 50% 35%;
-}
+.portada__video { position: absolute; inset: 0; will-change: transform; }
+.portada__video video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
 .portada__video::after {
   content: ""; position: absolute; inset: 0;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 52%, rgba(0,0,0,.92) 86%, #000 100%);
+  background: linear-gradient(180deg, rgba(20,20,20,.7) 0%, rgba(20,20,20,0) 34%, rgba(20,20,20,0) 50%, rgba(20,20,20,.92) 84%, var(--negro) 100%);
 }
 .portada__texto {
-  position: relative;
+  position: relative; z-index: 3;
   display: flex; flex-direction: column; justify-content: space-between; align-items: center;
-  padding: max(2.25rem, env(safe-area-inset-top)) var(--margen) 3rem;
+  padding: max(3.25rem, calc(env(safe-area-inset-top) + 2rem)) var(--margen) 3.25rem;
   text-align: center;
 }
-.marca {
-  font-family: var(--caps);
-  font-weight: 500;
-  font-size: clamp(2.5rem, 11vw, 4rem);
-  letter-spacing: .42em;
-  margin: 0 0 0 .42em; /* compensa el tracking */
-  line-height: 1;
-  color: var(--oro);
-}
-.js .marca--entrada { letter-spacing: .9em; opacity: 0; transition: letter-spacing 2.6s cubic-bezier(.2,.7,.1,1) .9s, opacity 1.8s ease .9s; }
-.js .listo .marca--entrada { letter-spacing: .42em; opacity: 1; }
+.logo { margin: 0; width: min(74vw, 340px); }
+.logo img { width: 100%; height: auto; }
+.js .entrada { opacity: 0; filter: blur(14px); transform: translateY(10px);
+  transition: opacity 2.2s cubic-bezier(.2,.7,.1,1) 1.4s, filter 2.2s cubic-bezier(.2,.7,.1,1) 1.4s, transform 2.2s cubic-bezier(.2,.7,.1,1) 1.4s; }
+.js .listo .entrada { opacity: 1; filter: none; transform: none; }
 .portada__bajada { max-width: 24ch; }
 .portada__bajada p { margin: 0; font-size: 1.25rem; line-height: 1.5; }
 .portada__bajada p + p { margin-top: .5rem; font-style: italic; color: var(--oro-claro); font-size: 1.0625rem; }
@@ -167,15 +160,13 @@ a { color: inherit; }
 @keyframes gotear { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
 
 @media (min-width: 900px) {
-  .portada { grid-template-columns: 1fr 1fr; }
+  .portada { --marco-inset: 18px; grid-template-columns: 1fr 1fr; }
   .portada__video { position: relative; inset: auto; order: 2; height: 100svh; }
   .portada__video::after {
-    background:
-      linear-gradient(90deg, #000 0%, rgba(0,0,0,0) 30%),
-      linear-gradient(180deg, rgba(0,0,0,0) 70%, #000 100%);
+    background: linear-gradient(90deg, var(--negro) 0%, rgba(20,20,20,0) 30%), linear-gradient(180deg, rgba(20,20,20,0) 70%, var(--negro) 100%);
   }
   .portada__texto { order: 1; justify-content: center; gap: 3rem; padding-left: var(--margen); }
-  .marca { font-size: clamp(3.5rem, 6vw, 6rem); }
+  .logo { width: min(36vw, 520px); }
   .portada__bajada { max-width: 26ch; }
   .portada__bajada p { font-size: 1.5rem; }
 }
@@ -183,169 +174,96 @@ a { color: inherit; }
 /* ───────── Qué es Mixo ───────── */
 .que-es {
   padding: clamp(5rem, 14vw, 10rem) var(--margen);
-  max-width: 78rem;
-  margin: 0 auto;
-  display: grid;
-  gap: 3.5rem;
-  align-items: center;
+  max-width: 78rem; margin: 0 auto;
+  display: grid; gap: 3.5rem; align-items: center;
 }
 .que-es h2 { font-size: clamp(3.5rem, 14vw, 6rem); margin-bottom: 2rem; }
 .que-es p { margin: 0 0 1.25rem; max-width: 34ch; font-size: 1.125rem; }
 .que-es p:last-child { margin-bottom: 0; }
-.marco {
-  position: relative;
-  overflow: hidden;
-  outline: 1px solid var(--linea);
-  outline-offset: 10px;
-}
-.marco img {
-  width: 100%;
-  height: 118%;
-  object-fit: cover;
-  will-change: transform;
-}
+.marco { position: relative; overflow: hidden; outline: 1px solid var(--linea); outline-offset: 10px; }
+.marco img { width: 100%; height: 118%; object-fit: cover; will-change: transform; }
 .que-es .marco { aspect-ratio: 4 / 3; margin: 10px; }
-@media (min-width: 900px) {
-  .que-es { grid-template-columns: 5fr 6fr; gap: 6rem; }
-}
+@media (min-width: 900px) { .que-es { grid-template-columns: 5fr 6fr; gap: 6rem; } }
 
-.frase {
-  padding: 0 var(--margen) clamp(5rem, 14vw, 9rem);
-  text-align: center;
-}
+.frase { padding: 0 var(--margen) clamp(5rem, 14vw, 9rem); text-align: center; }
 .frase p {
-  margin: 0 auto;
-  max-width: 18ch;
-  font-family: var(--caps);
-  font-weight: 500;
-  font-size: clamp(1.75rem, 6.5vw, 3.25rem);
-  line-height: 1.25;
-  letter-spacing: .03em;
-  color: var(--oro);
+  margin: 0 auto; max-width: 18ch;
+  font-family: var(--grabado); font-weight: 400;
+  font-size: clamp(1.875rem, 7vw, 3.5rem);
+  line-height: 1.2; letter-spacing: .02em;
+  color: var(--crema);
 }
 
 /* ───────── La carta (recorrido horizontal) ───────── */
 .carta { position: relative; }
-.carta__escena {
-  position: sticky; top: 0;
-  height: 100svh;
-  overflow: hidden;
-  display: flex; flex-direction: column;
-}
-.carta__pista {
-  display: flex;
-  height: 100%;
-  will-change: transform;
-}
+.carta__escena { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; flex-direction: column; }
+.carta__pista { display: flex; height: 100%; will-change: transform; }
 .panel {
-  flex: 0 0 100vw;
-  height: 100%;
-  display: grid;
-  align-content: center;
-  padding: max(2.5rem, env(safe-area-inset-top)) var(--margen) 4rem;
+  flex: 0 0 100vw; height: 100%;
+  display: grid; align-content: center;
+  padding: max(3.5rem, env(safe-area-inset-top)) var(--margen) 3rem;
 }
 .panel--intro { justify-items: center; text-align: center; }
 .panel--intro h2 { font-size: clamp(4rem, 17vw, 8rem); }
 .panel--intro p { margin: 1.75rem auto 0; max-width: 26ch; font-size: 1.125rem; }
 .panel--intro .pista-texto { margin-top: 2.5rem; font-style: italic; color: var(--oro-claro); font-size: .9375rem; }
 
-.trago {
-  grid-template-rows: auto auto;
-  justify-items: center;
-  text-align: center;
-  gap: 1rem;
-}
+.trago { justify-items: center; text-align: center; gap: 1.25rem; }
 .trago__foto {
   position: relative;
-  height: min(52svh, 112vw);
+  height: min(48svh, 104vw);
   aspect-ratio: 4 / 5;
+  outline: 1px solid var(--linea); outline-offset: 10px;
   will-change: transform;
 }
-.trago__foto { outline: 1px solid var(--linea); outline-offset: 10px; }
-.trago__foto img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
+.trago__foto img { width: 100%; height: 100%; object-fit: cover; }
 .trago h3 {
-  margin: 0 0 .5rem;
-  font-family: var(--caps);
-  font-weight: 500;
-  font-size: clamp(1.5rem, 6vw, 2.5rem);
-  letter-spacing: .06em;
-  line-height: 1.2;
-  color: var(--oro);
+  margin: .5rem 0 .5rem;
+  font-family: var(--grabado); font-weight: 400;
+  font-size: clamp(1.625rem, 6.5vw, 2.75rem);
+  letter-spacing: .03em; line-height: 1.15;
+  color: var(--crema);
 }
-.trago p { margin: 0 auto; max-width: 32ch; }
-.trago .ritual { margin-top: .5rem; font-style: italic; color: var(--oro-claro); }
+.trago p { margin: 0 auto; max-width: 34ch; }
+.trago .ritual { margin-top: .6rem; font-style: italic; color: var(--oro-claro); }
 
 @media (min-width: 900px) {
   .panel { flex-basis: 78vw; }
   .panel--intro { flex-basis: 60vw; }
-  .trago {
-    grid-template-columns: auto 1fr;
-    grid-template-rows: none;
-    justify-items: start;
-    align-items: center;
-    text-align: left;
-    gap: 4rem;
-  }
-  .trago__foto { height: 74svh; }
+  .trago { grid-template-columns: auto 1fr; justify-items: start; align-items: center; text-align: left; gap: 4.5rem; }
+  .trago__foto { height: 72svh; }
   .trago p { margin: 0; font-size: 1.125rem; }
 }
-
 .carta__avance {
   position: absolute; left: var(--margen); right: var(--margen); top: max(1.5rem, env(safe-area-inset-top));
-  height: 1px; background: rgba(198,161,91,.2);
+  height: 1px; background: rgba(194,158,98,.2);
 }
-.carta__avance span {
-  display: block; height: 100%; width: 100%;
-  background: var(--oro);
-  transform-origin: left; transform: scaleX(0);
-}
+.carta__avance span { display: block; height: 100%; width: 100%; background: var(--oro); transform-origin: left; transform: scaleX(0); }
 
-/* Sin JS o con movimiento reducido: la carta se ve en columna, sin recorrido */
 .sin-js .carta__escena, .estatico .carta__escena { position: static; height: auto; }
 .sin-js .carta__pista, .estatico .carta__pista { flex-direction: column; height: auto; transform: none !important; }
 .sin-js .panel, .estatico .panel { flex-basis: auto; height: auto; padding-top: 4rem; padding-bottom: 4rem; }
 .sin-js .carta__avance, .estatico .carta__avance, .sin-js .pista-texto, .estatico .pista-texto { display: none; }
 
 /* ───────── En tu evento ───────── */
-.evento {
-  padding: clamp(6rem, 14vw, 10rem) var(--margen) 0;
-  max-width: 78rem;
-  margin: 0 auto;
-}
+.evento { padding: clamp(6rem, 14vw, 10rem) var(--margen) 0; max-width: 78rem; margin: 0 auto; }
 .evento__texto { display: grid; gap: 2.5rem; margin-bottom: clamp(3.5rem, 8vw, 6rem); }
 .evento h2 { font-size: clamp(3.5rem, 14vw, 6rem); margin-bottom: 2rem; }
 .evento p { margin: 0 0 1.25rem; max-width: 36ch; font-size: 1.125rem; }
-.tipos {
-  list-style: none; margin: 0; padding: 0;
-  border-top: 1px solid var(--linea);
-}
+.tipos { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--linea); }
 .tipos li {
-  font-family: var(--caps);
-  font-weight: 500;
-  font-size: clamp(1.375rem, 5vw, 2rem);
-  letter-spacing: .08em;
-  color: var(--oro);
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--linea);
+  font-family: var(--grabado); font-weight: 400;
+  font-size: clamp(1.5rem, 5.5vw, 2.25rem); letter-spacing: .02em;
+  color: var(--crema);
+  padding: .9rem 0; border-bottom: 1px solid var(--linea);
 }
-.tipos .tipos__resto {
-  font-family: var(--serif); font-style: italic; font-weight: 400;
-  font-size: 1.125rem; letter-spacing: 0; color: var(--oro-claro);
-}
-.zona { margin-top: 1.5rem !important; font-style: italic; color: var(--marfil-suave); font-size: 1rem !important; }
-@media (min-width: 900px) {
-  .evento__texto { grid-template-columns: 1fr 1fr; gap: 6rem; align-items: end; }
-}
+.tipos .tipos__resto { font-family: var(--serif); font-style: italic; font-size: 1.125rem; letter-spacing: 0; color: var(--oro-claro); }
+.zona { margin-top: 1.5rem !important; font-style: italic; color: var(--crema-suave); font-size: 1rem !important; }
+@media (min-width: 900px) { .evento__texto { grid-template-columns: 1fr 1fr; gap: 6rem; align-items: end; } }
 
 .galeria {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .75rem;
-  height: clamp(640px, 150vw, 1100px);
-  overflow: hidden;
+  display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;
+  height: clamp(640px, 150vw, 1100px); overflow: hidden;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 10%, #000 88%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0%, #000 10%, #000 88%, transparent 100%);
 }
@@ -362,51 +280,39 @@ a { color: inherit; }
 
 /* ───────── Contacto ───────── */
 .contacto {
-  position: relative;
-  min-height: 100svh;
-  display: grid; place-items: center;
-  text-align: center;
-  overflow: hidden;
-  padding: 6rem var(--margen) max(4rem, env(safe-area-inset-bottom));
+  --marco-inset: 10px;
+  position: relative; min-height: 100svh;
+  display: grid; place-items: center; text-align: center; overflow: hidden;
+  padding: 6rem var(--margen) max(4.5rem, calc(env(safe-area-inset-bottom) + 3rem));
 }
 .contacto__fondo { position: absolute; inset: -10% 0; will-change: transform; }
-.contacto__fondo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; opacity: .38; }
-.contacto__fondo::after {
-  content: ""; position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,0,0,.35), #000 100%);
-}
-.contacto__caja { position: relative; max-width: 34rem; }
+.contacto__fondo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; opacity: .36; }
+.contacto__fondo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(20,20,20,.35), var(--negro) 100%); }
+.contacto__caja { position: relative; z-index: 3; max-width: 34rem; }
 .contacto h2 { font-size: clamp(3.5rem, 15vw, 6.5rem); margin-bottom: 1.5rem; }
 .contacto p { margin: 0 auto; max-width: 24ch; font-size: 1.375rem; line-height: 1.5; }
-.acciones {
-  display: grid; gap: .875rem;
-  margin: 3rem auto 0;
-  max-width: 20rem;
-}
+.acciones { display: grid; gap: .875rem; margin: 3rem auto 0; max-width: 20rem; }
 .boton {
-  display: block;
-  padding: 1.05rem 1.5rem;
+  display: block; padding: 1.05rem 1.5rem;
   border: 1px solid var(--oro);
-  font-family: var(--caps);
-  font-weight: 500;
-  font-size: 1.125rem;
-  letter-spacing: .08em;
-  text-decoration: none;
-  color: var(--oro);
-  transition: background-color .3s ease, color .3s ease;
+  font-family: var(--caps); font-weight: 500; font-size: 1.125rem; letter-spacing: .08em;
+  text-decoration: none; color: var(--oro);
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
 }
-.boton--lleno { background: var(--oro); color: #000; }
-.boton:hover { background: var(--oro-claro); border-color: var(--oro-claro); color: #000; }
+.boton--lleno { background: var(--oro); color: var(--negro); }
+.boton:hover { background: var(--oro-claro); border-color: var(--oro-claro); color: var(--negro); }
 .boton[hidden] { display: none; }
-.pie { margin-top: 4.5rem; }
-.pie .marca { font-size: 1.5rem; }
-.pie small { display: block; margin-top: 1rem; font-size: .8125rem; font-style: italic; color: var(--marfil-suave); }
+.pie { margin-top: 4.5rem; display: grid; justify-items: center; gap: 1.25rem; }
+.pie img { width: 72px; height: auto; opacity: .9; }
+.pie small { font-size: .8125rem; font-style: italic; color: var(--crema-suave); line-height: 1.6; }
+@media (min-width: 900px) { .contacto { --marco-inset: 18px; } }
 
+/* ───────── Acceso fijo ───────── */
 .fijo {
   position: fixed; z-index: 20;
   right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));
   padding: .8rem 1.25rem;
-  background: rgba(0,0,0,.82);
+  background: rgba(20,20,20,.84);
   -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
   border: 1px solid var(--oro);
   font-family: var(--caps); font-weight: 500; font-size: 1rem; letter-spacing: .06em;
@@ -415,13 +321,13 @@ a { color: inherit; }
   transition: opacity .5s cubic-bezier(.2,.7,.1,1), transform .5s cubic-bezier(.2,.7,.1,1), background-color .3s ease, color .3s ease;
 }
 .fijo--visible { opacity: 1; transform: none; pointer-events: auto; }
-.fijo:hover { background: var(--oro); color: #000; }
+.fijo:hover { background: var(--oro); color: var(--negro); }
 .sin-js .fijo { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .telon, .indicador { display: none; }
+  .telon, .humo, .indicador { display: none; }
+  .js .entrada { opacity: 1; filter: none; transform: none; transition: none; }
   .fijo { transition: none; }
-  .js .marca--entrada { letter-spacing: .42em; opacity: 1; transition: none; }
 }
 </style>
 </head>
@@ -431,17 +337,18 @@ a { color: inherit; }
   <div class="telon__paño telon__paño--izq"></div>
   <div class="telon__paño telon__paño--der"></div>
 </div>
+<canvas class="humo" id="humo" aria-hidden="true"></canvas>
 
 <main id="pagina">
 
-  <header class="portada">
+  <header class="portada marco-mixo">
     <div class="portada__video" data-parallax="0.35">
       <video id="video" playsinline muted loop autoplay preload="auto" poster="media/portada.jpg" aria-label="Helado de Mixo con dulce de leche cayendo sobre la cuchara">
         <source src="media/mixo.mp4" type="video/mp4">
       </video>
     </div>
     <div class="portada__texto">
-      <h1 class="marca marca--entrada">MIXO</h1>
+      <h1 class="logo entrada"><img src="media/logo.png" width="1400" height="633" alt="Mixo, Ice Cream Cocktails"></h1>
       <div class="portada__bajada">
         <p>Heladería de autor inspirada en la alta coctelería.</p>
         <p>Una experiencia dentro de tu evento.</p>
@@ -453,8 +360,8 @@ a { color: inherit; }
   <section class="que-es" aria-labelledby="t-que-es">
     <div>
       <h2 class="script" id="t-que-es">Qué es Mixo</h2>
-      <p>Mixo nace de la mixología: el arte de combinar destilados, sabores y técnicas para crear experiencias.</p>
-      <p>Tomamos los clásicos de la alta coctelería y los transformamos en helados de autor, infusionados con su propio destilado. El destilado forma parte de la receta desde el principio.</p>
+      <p>Mixo nace de la mixología: el arte de combinar destilados, sabores y técnicas para crear experiencias. Nosotros llevamos ese mismo concepto al mundo del helado.</p>
+      <p>Cada receta parte de un clásico de la alta coctelería y se transforma en un helado de autor, infusionado con su propio destilado.</p>
     </div>
     <div class="marco">
       <img src="media/ritual-humo.jpg" alt="Bartender de Mixo terminando un Old Fashioned con humo" loading="lazy" data-parallax-img>
@@ -477,8 +384,8 @@ a { color: inherit; }
           <div class="trago__foto"><img src="media/old-fashioned.jpg" alt="Chocolate Old Fashioned en vaso tallado" loading="lazy"></div>
           <div>
             <h3>Chocolate Old Fashioned</h3>
-            <p>Helado de chocolate con naranja, chocolate amargo y crocante de maní y almendras. Infusionado con whisky.</p>
-            <p class="ritual">Se termina con humo.</p>
+            <p>Helado de chocolate amargo infusionado con whisky, con crocante de maní y almendras en cada cucharada.</p>
+            <p class="ritual">Se termina con ralladura de naranja y un ahumado al momento de servir.</p>
           </div>
         </article>
 
@@ -486,16 +393,17 @@ a { color: inherit; }
           <div class="trago__foto"><img src="media/lemon-pie-gimlet.jpg" alt="Lemon Pie Gimlet en copa con merengue" loading="lazy"></div>
           <div>
             <h3>Lemon Pie Gimlet</h3>
-            <p>Cítrico, cremoso y fresco.</p>
-            <p class="ritual">Con merengue italiano flameado.</p>
+            <p>Helado cremoso de limón infusionado con gin, coronado con merengue italiano.</p>
+            <p class="ritual">El merengue se flamea frente al invitado.</p>
           </div>
         </article>
 
         <article class="panel trago">
-          <div class="trago__foto"><img src="media/ddl-reserve.jpg" alt="DDL Reserve con salsa de dulce de leche" loading="lazy"></div>
+          <div class="trago__foto"><img src="media/ddl-reserve.jpg" alt="DDL Reserve con dulce de leche" loading="lazy"></div>
           <div>
             <h3>DDL Reserve</h3>
-            <p>Helado cremoso con salsa de dulce de leche y ron dorado.</p>
+            <p>Helado de dulce de leche artesanal infusionado con ron, con granizado de chocolate negro.</p>
+            <p class="ritual">Se termina con una decoración de dulce de leche.</p>
           </div>
         </article>
 
@@ -503,7 +411,7 @@ a { color: inherit; }
           <div class="trago__foto"><img src="media/berry-martini.jpg" alt="Berry Martini en copa con pincho de frambuesa" loading="lazy"></div>
           <div>
             <h3>Berry Martini</h3>
-            <p>Crema americana con frutos rojos.</p>
+            <p>Helado de americana infusionado con vodka, con frutos rojos y granizado de chocolate blanco.</p>
             <p class="ritual">Coronado con un pincho de frambuesa.</p>
           </div>
         </article>
@@ -550,7 +458,7 @@ a { color: inherit; }
     </div>
   </section>
 
-  <section class="contacto" id="contacto" aria-labelledby="t-contacto">
+  <section class="contacto marco-mixo" id="contacto" aria-labelledby="t-contacto">
     <div class="contacto__fondo" data-parallax="-0.15"><img src="media/barra.jpg" alt="" loading="lazy"></div>
     <div class="contacto__caja">
       <h2 class="script" id="t-contacto">¿Ya tenés fecha?</h2>
@@ -560,8 +468,8 @@ a { color: inherit; }
         <a class="boton" href="https://www.instagram.com/mixo_icecream/" target="_blank" rel="noopener">Instagram</a>
       </div>
       <footer class="pie">
-        <p class="marca">MIXO</p>
-        <small>Exclusivo para mayores de 18.</small>
+        <img src="media/isologo.png" width="611" height="700" alt="Isologo de Mixo">
+        <small>Helado con alcohol.<br>Exclusivo para mayores de 18.</small>
       </footer>
     </div>
   </section>
@@ -572,7 +480,7 @@ a { color: inherit; }
 
 <script>
 (function () {
-  /* ── Datos de contacto: completar el número (con código de país, sin + ni espacios) ── */
+  /* ── Contacto ── */
   var WHATSAPP = '5493416054211';
   var MENSAJE = 'Hola Mixo, quiero contarles sobre mi evento.';
   if (WHATSAPP) {
@@ -584,20 +492,114 @@ a { color: inherit; }
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var raiz = document.documentElement;
   var pagina = document.getElementById('pagina');
-
-  /* ── Telón + entrada de la marca ── */
   var telon = document.getElementById('telon');
+  var lienzo = document.getElementById('humo');
+
+  /* ── Humo y brasas: el ritual del Old Fashioned como entrada ── */
+  function humo() {
+    var ctx = lienzo.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    var W, H;
+    function medirLienzo() {
+      W = window.innerWidth; H = window.innerHeight;
+      lienzo.width = W * dpr; lienzo.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    medirLienzo();
+
+    // textura de humo (ruido fractal con caída suave)
+    var nube = new Image();
+    nube.src = 'media/humo.png';
+
+    function azar(a, b) { return a + Math.random() * (b - a); }
+    var escala = Math.max(.7, Math.min(1.4, W / 900));
+    var bocanadas = [], brasas = [];
+    var inicio = performance.now();
+    var DURA_EMISION = 1900, FIN = 4600;
+
+    function nuevaBocanada() {
+      var desde = Math.random() < .5 ? -1 : 1;
+      bocanadas.push({
+        x: W / 2 + azar(-.06, .06) * W,
+        y: H * azar(.78, 1.02),
+        vx: desde * azar(.3, 1.4) * escala,
+        vy: -azar(1.1, 2.2) * escala,
+        t: azar(150, 260) * escala,
+        crece: azar(1.01, 1.018),
+        rot: Math.random() * 6.28, vr: azar(-.006, .006),
+        vida: 0, max: azar(130, 200),
+        alfa: azar(.18, .32)
+      });
+    }
+    function nuevaBrasa() {
+      brasas.push({
+        x: W / 2 + azar(-.12, .12) * W,
+        y: H * azar(.85, 1.02),
+        vy: -azar(1.4, 3.2) * escala,
+        fase: Math.random() * 6.28,
+        amp: azar(.3, 1.1),
+        r: azar(.8, 2.1),
+        vida: 0, max: azar(90, 170)
+      });
+    }
+
+    function cuadroHumo(ahora) {
+      var t = ahora - inicio;
+      ctx.clearRect(0, 0, W, H);
+      // todo el humo se disipa hacia el final
+      var general = t < 3000 ? 1 : Math.max(0, 1 - (t - 3000) / (FIN - 3000));
+      if (t < DURA_EMISION) {
+        if (Math.random() < .7 * (1 - t / DURA_EMISION) + .2) nuevaBocanada();
+        if (Math.random() < .5) nuevaBrasa();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+      for (var i = bocanadas.length - 1; i >= 0; i--) {
+        var b = bocanadas[i];
+        b.vida++; b.x += b.vx; b.y += b.vy; b.vx *= .995; b.vy *= .992;
+        b.t *= b.crece; b.rot += b.vr;
+        var v = b.vida / b.max;
+        var a = (v < .15 ? v / .15 : 1 - (v - .15) / .85) * b.alfa;
+        if (b.vida >= b.max) { bocanadas.splice(i, 1); continue; }
+        ctx.save(); ctx.globalAlpha = Math.max(0, a * general);
+        ctx.translate(b.x, b.y); ctx.rotate(b.rot);
+        if (nube.complete) ctx.drawImage(nube, -b.t / 2, -b.t / 2, b.t, b.t);
+        ctx.restore();
+      }
+      ctx.globalCompositeOperation = 'lighter';
+      for (var j = brasas.length - 1; j >= 0; j--) {
+        var e = brasas[j];
+        e.vida++; e.y += e.vy; e.x += Math.sin(e.fase + e.vida * .08) * e.amp;
+        if (e.vida >= e.max) { brasas.splice(j, 1); continue; }
+        var parpadeo = .55 + .45 * Math.sin(e.vida * .5 + e.fase);
+        var ae = (1 - e.vida / e.max) * parpadeo * general;
+        var gr = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, e.r * 5);
+        gr.addColorStop(0, 'rgba(255,214,140,' + ae + ')');
+        gr.addColorStop(.35, 'rgba(226,150,70,' + ae * .5 + ')');
+        gr.addColorStop(1, 'rgba(200,110,40,0)');
+        ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(e.x, e.y, e.r * 5, 0, 6.283); ctx.fill();
+      }
+      if (t < FIN && (t < DURA_EMISION || bocanadas.length || brasas.length)) requestAnimationFrame(cuadroHumo);
+      else lienzo.remove();
+    }
+    window.addEventListener('resize', medirLienzo);
+    requestAnimationFrame(cuadroHumo);
+  }
+
+  /* ── Telón: se abre y deja salir el humo ── */
+  var abierto = false;
   function abrir() {
+    if (abierto) return; abierto = true;
     telon.classList.add('telon--abierto');
     pagina.classList.add('listo');
-    setTimeout(function () { telon.classList.add('telon--fuera'); }, 2500);
+    setTimeout(function () { telon.classList.add('telon--fuera'); }, 2800);
   }
-  if (reduce) { telon.classList.add('telon--fuera'); pagina.classList.add('listo'); }
+  if (reduce) { telon.classList.add('telon--fuera'); lienzo.remove(); pagina.classList.add('listo'); }
   else {
-    window.addEventListener('load', function () { setTimeout(abrir, 300); });
-    setTimeout(abrir, 3500); // si la señal es floja, no dejar la página tapada
+    window.addEventListener('load', function () { humo(); setTimeout(abrir, 450); });
+    setTimeout(function () { if (!abierto) { if (lienzo.isConnected) humo(); abrir(); } }, 3500);
   }
 
+  /* ── Video y acceso fijo ── */
   var video = document.getElementById('video');
   var fijo = document.getElementById('fijo');
   var portada = document.querySelector('.portada');
@@ -605,7 +607,7 @@ a { color: inherit; }
   if ('IntersectionObserver' in window) {
     var visibles = {};
     var io = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) { visibles[e.target.className.split(' ')[0]] = e.isIntersecting; });
+      entradas.forEach(function (e) { visibles[e.target === portada ? 'portada' : 'contacto'] = e.isIntersecting; });
       if (!reduce) { visibles.portada ? video.play().catch(function(){}) : video.pause(); }
       fijo.classList.toggle('fijo--visible', !visibles.portada && !visibles.contacto);
     }, { threshold: 0.15 });
@@ -620,13 +622,11 @@ a { color: inherit; }
   var avance = document.getElementById('avance');
   var fotos = Array.prototype.slice.call(document.querySelectorAll('.trago__foto'));
   var recorrido = 0;
-
   function medir() {
     recorrido = Math.max(0, pista.scrollWidth - window.innerWidth);
     carta.style.height = (recorrido + window.innerHeight) + 'px';
   }
 
-  /* ── Elementos con movimiento ── */
   var paralaje = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
   var imgsMarco = Array.prototype.slice.call(document.querySelectorAll('[data-parallax-img]'));
   var columnas = Array.prototype.slice.call(document.querySelectorAll('.galeria__col'));
@@ -634,24 +634,19 @@ a { color: inherit; }
   var pendiente = false;
   function cuadro() {
     pendiente = false;
-    var vh = window.innerHeight;
-    var vw = window.innerWidth;
+    var vh = window.innerHeight, vw = window.innerWidth;
 
-    // carta horizontal
     var r = carta.getBoundingClientRect();
     var p = recorrido ? Math.min(1, Math.max(0, -r.top / recorrido)) : 0;
     pista.style.transform = 'translate3d(' + (-p * recorrido) + 'px,0,0)';
     avance.style.transform = 'scaleX(' + p + ')';
-    // cada copa crece cuando llega al centro
     fotos.forEach(function (f) {
       var b = f.getBoundingClientRect();
-      var centro = b.left + b.width / 2;
-      var d = Math.min(1, Math.abs(centro - vw / 2) / vw);
+      var d = Math.min(1, Math.abs(b.left + b.width / 2 - vw / 2) / vw);
       f.style.transform = 'scale(' + (1 - d * 0.22) + ')';
       f.style.opacity = 1 - d * 0.6;
     });
 
-    // capas con paralaje
     paralaje.forEach(function (el) {
       var b = el.parentNode.getBoundingClientRect();
       if (b.bottom < 0 || b.top > vh) return;
@@ -660,7 +655,7 @@ a { color: inherit; }
     imgsMarco.forEach(function (img) {
       var b = img.parentNode.getBoundingClientRect();
       if (b.bottom < 0 || b.top > vh) return;
-      var t = (b.top + b.height / 2 - vh / 2) / vh; // -1..1
+      var t = (b.top + b.height / 2 - vh / 2) / vh;
       img.style.transform = 'translate3d(0,' + (-8 + t * 8) + '%,0)';
     });
     columnas.forEach(function (c) {
