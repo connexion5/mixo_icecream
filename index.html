@@ -61,6 +61,11 @@ body {
   overflow-x: clip;
 }
 img, video { display: block; max-width: 100%; }
+::selection { background: var(--oro); color: #000; }
+html { scrollbar-color: #3a2a12 #000; caret-color: var(--oro); }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #3a2a12; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--oro-claro); outline-offset: 4px; }
 
@@ -86,16 +91,29 @@ a { color: inherit; }
 .sin-js .telon { display: none; }
 .telon__paño {
   height: 100%;
+  position: relative;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 78%, rgba(0,0,0,.75) 100%),
-    repeating-linear-gradient(90deg,
-      var(--bordo-hondo) 0px, var(--bordo) 24px, #6E1A2C 36px, var(--bordo) 48px, var(--bordo-hondo) 74px);
-  transition: transform 2.3s cubic-bezier(.72,0,.18,1);
+    /* luz cenital y sombra al piso */
+    radial-gradient(120% 60% at 50% -10%, rgba(255,190,170,.10), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 72%, rgba(0,0,0,.8) 100%),
+    /* pliegues de distinto ancho, como cae una tela pesada */
+    linear-gradient(90deg,
+      #1E0408 0%, #4A0F1B 4%, #7A2236 7.5%, #4E101D 11%, #22050A 14%,
+      #5A1424 19%, #8A2A40 22%, #5C1526 25%, #24060B 29%,
+      #4A0F1B 33%, #6E1C31 38%, #3A0B15 41%, #1C0407 44%,
+      #561322 50%, #842840 54%, #561322 57%, #20050A 61%,
+      #4E101D 66%, #77233A 70%, #43101C 73%, #1E0408 76%,
+      #5A1424 82%, #8A2A40 86%, #4A0F1B 90%, #22050A 95%, #3A0B15 100%);
+  transition: transform 2.4s cubic-bezier(.76,0,.16,1);
 }
-.telon__paño--izq { box-shadow: inset -1px 0 0 var(--linea), inset 0 -2px 0 var(--oro); }
-.telon__paño--der { box-shadow: inset 1px 0 0 var(--linea), inset 0 -2px 0 var(--oro); }
+.telon__paño::after { /* fleco dorado */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: linear-gradient(90deg, #7d6232, var(--oro-claro) 30%, var(--oro) 60%, #7d6232);
+}
+.telon__paño--der { transform: scaleX(-1); }
+.telon--abierto .telon__paño--der { transform: translateX(102%) scaleX(-1); }
+.telon__paño--izq, .telon__paño--der { box-shadow: inset -1px 0 0 var(--linea); }
 .telon--abierto .telon__paño--izq { transform: translateX(-102%); }
-.telon--abierto .telon__paño--der { transform: translateX(102%); }
 .telon--fuera { display: none; }
 
 /* ───────── Portada ───────── */
@@ -202,7 +220,7 @@ a { color: inherit; }
   font-weight: 500;
   font-size: clamp(1.75rem, 6.5vw, 3.25rem);
   line-height: 1.25;
-  letter-spacing: .06em;
+  letter-spacing: .03em;
   color: var(--oro);
 }
 
@@ -238,23 +256,22 @@ a { color: inherit; }
   gap: 1rem;
 }
 .trago__foto {
+  position: relative;
   height: min(52svh, 112vw);
   aspect-ratio: 4 / 5;
   will-change: transform;
 }
+.trago__foto { outline: 1px solid var(--linea); outline-offset: 10px; }
 .trago__foto img {
   width: 100%; height: 100%;
   object-fit: cover;
-  /* funde el fondo bordó de la foto con el negro de la página */
-  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 52%, transparent 100%);
-          mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 52%, transparent 100%);
 }
 .trago h3 {
   margin: 0 0 .5rem;
   font-family: var(--caps);
   font-weight: 500;
   font-size: clamp(1.5rem, 6vw, 2.5rem);
-  letter-spacing: .1em;
+  letter-spacing: .06em;
   line-height: 1.2;
   color: var(--oro);
 }
@@ -277,7 +294,7 @@ a { color: inherit; }
 }
 
 .carta__avance {
-  position: absolute; left: var(--margen); right: var(--margen); bottom: max(1.75rem, env(safe-area-inset-bottom));
+  position: absolute; left: var(--margen); right: var(--margen); top: max(1.5rem, env(safe-area-inset-top));
   height: 1px; background: rgba(198,161,91,.2);
 }
 .carta__avance span {
@@ -369,7 +386,7 @@ a { color: inherit; }
   font-family: var(--caps);
   font-weight: 500;
   font-size: 1.125rem;
-  letter-spacing: .12em;
+  letter-spacing: .08em;
   text-decoration: none;
   color: var(--oro);
   transition: background-color .3s ease, color .3s ease;
@@ -381,8 +398,25 @@ a { color: inherit; }
 .pie .marca { font-size: 1.5rem; }
 .pie small { display: block; margin-top: 1rem; font-size: .8125rem; font-style: italic; color: var(--marfil-suave); }
 
+.fijo {
+  position: fixed; z-index: 20;
+  right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));
+  padding: .8rem 1.25rem;
+  background: rgba(0,0,0,.82);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border: 1px solid var(--oro);
+  font-family: var(--caps); font-weight: 500; font-size: 1rem; letter-spacing: .06em;
+  color: var(--oro); text-decoration: none;
+  opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: opacity .5s cubic-bezier(.2,.7,.1,1), transform .5s cubic-bezier(.2,.7,.1,1), background-color .3s ease, color .3s ease;
+}
+.fijo--visible { opacity: 1; transform: none; pointer-events: auto; }
+.fijo:hover { background: var(--oro); color: #000; }
+.sin-js .fijo { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
   .telon, .indicador { display: none; }
+  .fijo { transition: none; }
   .js .marca--entrada { letter-spacing: .42em; opacity: 1; transition: none; }
 }
 </style>
@@ -416,7 +450,7 @@ a { color: inherit; }
     <div>
       <h2 class="script" id="t-que-es">Qué es Mixo</h2>
       <p>Mixo nace de la mixología: el arte de combinar destilados, sabores y técnicas para crear experiencias.</p>
-      <p>Tomamos los clásicos de la alta coctelería y los transformamos en helados de autor, infusionados con su propio destilado. El alcohol no va encima: está en la receta desde el principio.</p>
+      <p>Tomamos los clásicos de la alta coctelería y los transformamos en helados de autor, infusionados con su propio destilado. El destilado forma parte de la receta desde el principio.</p>
     </div>
     <div class="marco">
       <img src="media/ritual-humo.jpg" alt="Bartender de Mixo terminando un Old Fashioned con humo" loading="lazy" data-parallax-img>
@@ -511,7 +545,7 @@ a { color: inherit; }
     </div>
   </section>
 
-  <section class="contacto" aria-labelledby="t-contacto">
+  <section class="contacto" id="contacto" aria-labelledby="t-contacto">
     <div class="contacto__fondo" data-parallax="-0.15"><img src="media/barra.jpg" alt="" loading="lazy"></div>
     <div class="contacto__caja">
       <h2 class="script" id="t-contacto">¿Ya tenés fecha?</h2>
@@ -528,6 +562,8 @@ a { color: inherit; }
   </section>
 
 </main>
+
+<a class="fijo" id="fijo" href="#contacto">Consultar fecha</a>
 
 <script>
 (function () {
@@ -557,7 +593,21 @@ a { color: inherit; }
     setTimeout(abrir, 3500); // si la señal es floja, no dejar la página tapada
   }
 
-  if (reduce) { raiz.classList.add('estatico'); return; }
+  var video = document.getElementById('video');
+  var fijo = document.getElementById('fijo');
+  var portada = document.querySelector('.portada');
+  var contacto = document.getElementById('contacto');
+  if ('IntersectionObserver' in window) {
+    var visibles = {};
+    var io = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) { visibles[e.target.className.split(' ')[0]] = e.isIntersecting; });
+      if (!reduce) { visibles.portada ? video.play().catch(function(){}) : video.pause(); }
+      fijo.classList.toggle('fijo--visible', !visibles.portada && !visibles.contacto);
+    }, { threshold: 0.15 });
+    io.observe(portada); io.observe(contacto);
+  }
+
+  if (reduce) { video.removeAttribute('autoplay'); video.pause(); raiz.classList.add('estatico'); return; }
 
   /* ── Carta: el scroll vertical la recorre de costado ── */
   var carta = document.getElementById('carta');
