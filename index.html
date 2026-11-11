@@ -17,6 +17,7 @@
 <link rel="preload" href="fonts/cormorant-sc-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon-script-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="media/logo.png" as="image">
+<link rel="preload" href="media/portada.jpg" as="image">
 
 <script>document.documentElement.classList.replace('sin-js','js');</script>
 
@@ -94,9 +95,15 @@ a { color: inherit; }
   overflow: hidden;
   display: grid;
 }
+.portada__video { position: absolute; inset: 0; will-change: transform; }
+.portada__video video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+.portada__video::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(20,20,20,.7) 0%, rgba(20,20,20,0) 34%, rgba(20,20,20,0) 50%, rgba(20,20,20,.92) 84%, var(--negro) 100%);
+}
 .portada__texto {
   position: relative; z-index: 3;
-  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2.75rem;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: center;
   padding: max(3.25rem, calc(env(safe-area-inset-top) + 2rem)) var(--margen) 3.25rem;
   text-align: center;
 }
@@ -117,10 +124,14 @@ a { color: inherit; }
 @keyframes gotear { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
 
 @media (min-width: 900px) {
-  .portada { --marco-inset: 18px; }
-  .portada__texto { gap: 3rem; }
+  .portada { --marco-inset: 18px; grid-template-columns: 1fr 1fr; }
+  .portada__video { position: relative; inset: auto; order: 2; height: 100svh; }
+  .portada__video::after {
+    background: linear-gradient(90deg, var(--negro) 0%, rgba(20,20,20,0) 30%), linear-gradient(180deg, rgba(20,20,20,0) 70%, var(--negro) 100%);
+  }
+  .portada__texto { order: 1; justify-content: center; gap: 3rem; padding-left: var(--margen); }
   .logo { width: min(36vw, 520px); }
-  .portada__bajada { max-width: 34ch; }
+  .portada__bajada { max-width: 26ch; }
   .portada__bajada p { font-size: 1.5rem; }
 }
 
@@ -546,6 +557,11 @@ a { color: inherit; }
 <main id="pagina">
 
   <header class="portada marco-mixo">
+    <div class="portada__video" data-parallax="0.35">
+      <video id="video" playsinline muted loop autoplay preload="auto" poster="media/portada.jpg" aria-label="Helado de Mixo con dulce de leche cayendo sobre la cuchara">
+        <source src="media/mixo.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="portada__texto">
       <h1 class="logo entrada"><img src="media/logo.png" width="1400" height="633" alt="Mixo, Ice Cream Cocktails"></h1>
       <div class="portada__bajada">
@@ -776,10 +792,11 @@ a { color: inherit; }
   var raiz = document.documentElement;
   var pagina = document.getElementById('pagina');
 
-  /* ── Entrada: la marca aparece sobre negro ── */
+  /* ── Entrada: el logo aparece sobre el video ── */
   requestAnimationFrame(function () { pagina.classList.add('listo'); });
 
-  /* ── Acceso fijo ── */
+  /* ── Video y acceso fijo ── */
+  var video = document.getElementById('video');
   var fijo = document.getElementById('fijo');
   var portada = document.querySelector('.portada');
   var contacto = document.getElementById('contacto');
@@ -787,12 +804,13 @@ a { color: inherit; }
     var visibles = {};
     var io = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (e) { visibles[e.target === portada ? 'portada' : 'contacto'] = e.isIntersecting; });
+      if (!reduce) { visibles.portada ? video.play().catch(function(){}) : video.pause(); }
       fijo.classList.toggle('fijo--visible', !visibles.portada && !visibles.contacto);
     }, { threshold: 0.15 });
     io.observe(portada); io.observe(contacto);
   }
 
-  if (reduce) { raiz.classList.add('estatico'); return; }
+  if (reduce) { video.removeAttribute('autoplay'); video.pause(); raiz.classList.add('estatico'); return; }
 
   /* ── Mapa y cartel: se activan al llegar ── */
   if ('IntersectionObserver' in window) {
