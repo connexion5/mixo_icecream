@@ -379,9 +379,11 @@ a { color: inherit; }
 @keyframes latir { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(4); opacity: 0; } }
 .mapa__ciudad { font-family: var(--grabado); font-size: 19px; fill: var(--oro-claro); }
 .mapa__nota { font-family: var(--serif); font-style: italic; font-size: 13px; fill: var(--oro); }
-.mapa figcaption { margin: 1.25rem auto 0; max-width: 30ch; font-size: 1.125rem; line-height: 1.6; color: var(--oro-claro); text-wrap: balance; }
+.mapa figcaption { margin: 1.25rem auto 0; max-width: none; font-size: 1.125rem; line-height: 1.6; color: var(--oro-claro); text-wrap: balance; }
+@media (min-width: 700px) { .mapa figcaption { max-width: none; width: max-content; margin-left: 50%; transform: translateX(-50%); } .mapa__zona-texto { white-space: nowrap; max-width: none; } }
 .mapa figcaption span { display: block; }
-.mapa__consulta { margin-top: .4rem; font-style: italic; font-size: 1rem; color: var(--crema-suave); }
+.mapa__zona-texto { max-width: 30ch; margin: 0 auto; }
+.mapa__consulta { margin-top: .4rem; font-style: italic; font-size: clamp(1rem, 4.3vw, 1.125rem); white-space: nowrap; color: var(--crema-suave); }
 /* la ruta se dibuja al llegar */
 .js .mapa__ruta { clip-path: inset(0 100% 0 0); transition: clip-path 2.2s cubic-bezier(.4,0,.2,1) .3s; }
 .js .mapa--visto .mapa__ruta { clip-path: inset(0 0 0 0); }
