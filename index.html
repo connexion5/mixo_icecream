@@ -380,6 +380,8 @@ a { color: inherit; }
 .mapa__ciudad { font-family: var(--grabado); font-size: 19px; fill: var(--oro-claro); }
 .mapa__nota { font-family: var(--serif); font-style: italic; font-size: 13px; fill: var(--oro); }
 .mapa figcaption { margin: 1.25rem auto 0; max-width: 30ch; font-size: 1.125rem; line-height: 1.6; color: var(--oro-claro); text-wrap: balance; }
+.mapa figcaption span { display: block; }
+.mapa__consulta { margin-top: .4rem; font-style: italic; font-size: 1rem; color: var(--crema-suave); }
 /* la ruta se dibuja al llegar */
 .js .mapa__ruta { clip-path: inset(0 100% 0 0); transition: clip-path 2.2s cubic-bezier(.4,0,.2,1) .3s; }
 .js .mapa--visto .mapa__ruta { clip-path: inset(0 0 0 0); }
@@ -685,7 +687,7 @@ a { color: inherit; }
           <li class="tipos__resto">Y cualquier evento que quieras celebrar</li>
         </ul>
         <figure class="mapa" id="mapa">
-          <svg viewBox="0 0 380 310" role="img" aria-label="Mapa: Mixo lleva su barra a Rosario y alrededores, y a Buenos Aires">
+          <svg viewBox="0 0 380 310" role="img" aria-label="Mapa: Mixo trabaja en Rosario y alrededores, y en Buenos Aires">
             <g class="mapa__agua" fill="none">
               <path d="M32 5 L48 55 L83 93 L127 130 L183 170 L220 195"/><path d="M253 5 L241 70 L232 130 L228 170"/><path d="M220 195 L235 220 L274 252 L332 290 L357 320"/><path d="M228 170 L278 205 L332 220 L382 245"/>
             </g>
@@ -697,7 +699,7 @@ a { color: inherit; }
             <text class="mapa__nota" x="84" y="77">y alrededores</text>
             <text class="mapa__ciudad" x="220" y="250" text-anchor="end">Buenos Aires</text>
           </svg>
-          <figcaption>Llevamos la barra a Rosario y alrededores, y a Buenos&nbsp;Aires. ¿Tu&nbsp;evento es en otra ciudad? Consultanos.</figcaption>
+          <figcaption><span class="mapa__zona-texto">Trabajamos en Rosario y alrededores, y en Buenos&nbsp;Aires.</span><span class="mapa__consulta">¿Tu&nbsp;evento es en otra ciudad? Consultanos.</span></figcaption>
         </figure>
       </div>
     </div>
