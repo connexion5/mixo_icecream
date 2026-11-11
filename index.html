@@ -173,7 +173,8 @@ a { color: inherit; }
 }
 /* el bartender detrás de la barra presenta la carta */
 .libro-escena__fondo { position: absolute; inset: 0; }
-.libro-escena__fondo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; opacity: .5; }
+.libro-escena__fondo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; opacity: .55; }
+@media (min-width: 900px) { .libro-escena__fondo img { object-position: 50% 38%; } }
 .libro-escena__fondo::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, var(--negro) 0%, rgba(20,20,20,.35) 22%, rgba(20,20,20,.25) 60%, var(--negro) 100%);
@@ -589,7 +590,7 @@ a { color: inherit; }
 
   <section class="carta" id="carta" aria-labelledby="t-carta">
     <div class="libro-escena">
-      <div class="libro-escena__fondo" aria-hidden="true"><img src="media/bartender.jpg" alt="" loading="lazy"></div>
+      <div class="libro-escena__fondo" aria-hidden="true"><img src="media/carta-fondo.jpg" alt="" loading="lazy"></div>
       <div class="libro" id="libro">
         <div class="libro__pagina">
           <img class="libro__logo" src="media/logo-tinta.png" width="700" height="252" alt="Mixo">
